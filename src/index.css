@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  body {
+    @apply font-open-sans-medium
+  }
+
+  @font-face {
+    font-family: "open-sans-medium";
+    src: url("./assets/fonts/open_sans/OpenSans-Medium.woff2") format("woff2"),
+      url("./assets/fonts/open_sans/OpenSans-Medium.woff") format("woff"),
+      url("./assets/fonts/open_sans/OpenSans-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "open-sans-regular";
+    src: url("./assets/fonts/open_sans/OpenSans-Regular.woff2") format("woff2"),
+      url("./assets/fonts/open_sans/OpenSans-Regular.woff") format("woff"),
+      url("./assets/fonts/open_sans/OpenSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "open-sans-bold";
+    src: url("./assets/fonts/open_sans/OpenSans-Bold.woff2") format("woff2"),
+      url("./assets/fonts/open_sans/OpenSans-Bold.woff") format("woff"),
+      url("./assets/fonts/open_sans/OpenSans-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "open-sans-semibold";
+    src: url("./assets/fonts/open_sans/OpenSans-SemiBold.woff2") format("woff2"),
+      url("./assets/fonts/open_sans/OpenSans-SemiBold.woff") format("woff"),
+      url("./assets/fonts/open_sans/OpenSans-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "dancing-script-medium";
+    src: url("./assets/fonts/dancing_script/DancingScript-Medium.woff2")
+        format("woff2"),
+      url("./assets/fonts/dancing_script/DancingScript-Medium.woff")
+        format("woff"),
+      url("./assets/fonts/dancing_script/DancingScript-Medium.ttf")
+        format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "dancing-script-semibold";
+    src: url("./assets/fonts/dancing_script/DancingScript-SemiBold.woff2")
+        format("woff2"),
+      url("./assets/fonts/dancing_script/DancingScript-SemiBold.woff")
+        format("woff"),
+      url("./assets/fonts/dancing_script/DancingScript-SemiBold.ttf")
+        format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "dancing-script-regular";
+    src: url("./assets/fonts/dancing_script/DancingScript-Regular.woff2")
+        format("woff2"),
+      url("./assets/fonts/dancing_script/DancingScript-Regular.woff")
+        format("woff"),
+      url("./assets/fonts/dancing_script/DancingScript-Regular.ttf")
+        format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "dancing-script-bold";
+    src: url("./assets/fonts/dancing_script/DancingScript-Bold.woff2")
+        format("woff2"),
+      url("./assets/fonts/dancing_script/DancingScript-Bold.woff")
+        format("woff"),
+      url("./assets/fonts/dancing_script/DancingScript-Bold.ttf")
+        format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+
+@layer utilities {
+  .transition-global {
+    @apply transition-all duration-500 ease-in-out
+  }
+}
