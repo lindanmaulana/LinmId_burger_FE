@@ -11,6 +11,7 @@ import store from "./redux/store.ts";
 import RouterAuth from "./routes/auth/index.tsx";
 import RouterClient from "./routes/client/index.tsx";
 import PageClient from "./Pages/Client/index.tsx";
+import "swiper/css"
 
 listen();
 

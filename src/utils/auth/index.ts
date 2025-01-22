@@ -1,6 +1,5 @@
-import { api } from "../axiosInstance";
+import { api, baseURL } from "../axiosInstance";
 import { errorService } from "../errors/errorService";
-const baseURL = import.meta.env.VITE_BASEURL;
 
 export interface ILogin {
   username: string;
