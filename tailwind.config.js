@@ -9,8 +9,10 @@ export default {
       colors: {
         primary: "#222831",
         secondary: "#0D0E10",
-        devOrange: "#E69C00",
+        devOrange: "#FFBE33",
+        devOrangeDark: "#E69C00",
         devBlack: "#0C0C0C",
+        devWhiteGrey: "#F1F2F3"
       },
       fontFamily: {
         "open-sans-medium": ["open-sans-medium", "serif"],
