@@ -3,9 +3,9 @@ import ButtonLink from "../../../../../Components/Button/ButtonLink";
 import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
 import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
 import { ServiceDiscountsGetAll } from "../../../../../utils/discounts";
-import CardProductDiscount from "./CardProductDiscount";
+import CardOffer from "./CardOffer";
 
-const ProductDiscount = () => {
+const Offer = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["queryGetAllDiscount"],
     queryFn: () => ServiceDiscountsGetAll(),
@@ -19,7 +19,7 @@ const ProductDiscount = () => {
     <LayoutSection className="pt-20 pb-10">
       <LayoutContainer className="max-w-6xl">
         <div className="grid grid-cols-2 gap-8 mb-8">
-          <CardProductDiscount data={data.data} />
+          <CardOffer data={data.data} />
         </div>
         <ButtonLink
           to="/product-discount"
@@ -32,4 +32,4 @@ const ProductDiscount = () => {
   );
 };
 
-export default ProductDiscount;
+export default Offer;

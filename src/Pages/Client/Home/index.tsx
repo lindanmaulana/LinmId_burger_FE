@@ -1,13 +1,15 @@
+import About from "./Section/About";
+import Food from "./Section/Food";
 import HeroBanner from "./Section/HeroBanner";
-import OurMenu from "./Section/OurMenu";
-import ProductDiscount from "./Section/ProductDiscount";
+import Offer from "./Section/Offer";
 
 const PageHome = () => {
   return (
     <>
       <HeroBanner />
-      <ProductDiscount />
-      <OurMenu />
+      <Offer />
+      <Food />
+      <About />
     </>
   );
 };

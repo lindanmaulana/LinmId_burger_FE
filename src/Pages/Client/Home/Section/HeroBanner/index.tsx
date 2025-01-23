@@ -20,6 +20,7 @@ const HeroBanner = () => {
           modules={[Pagination, Autoplay]}
           loop={true}
           autoplay={{delay: 3000, disabledOnInteraction: false}}
+          speed={1000}
         >
           {dataBannerList?.map((banner) => (
             <SwiperSlide key={banner.id} className="w-full h-full">

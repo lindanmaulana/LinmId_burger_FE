@@ -1,12 +1,12 @@
-import { categorieProduct, SET_BURGER, SET_FRIES, SET_PASTA, SET_PIZZA } from "../../../../../redux/slices/client/menuProduct"
+import { foodCategorie, SET_BURGER, SET_FRIES, SET_PASTA, SET_PIZZA } from "../../../../../redux/slices/client/HomeFood"
 
-export interface menuActionList {
+export interface actionFoodList {
     id: number | string
     title: string
-    setType: categorieProduct
+    setType: foodCategorie
 }
 
-export const dataMenuAction: menuActionList[] = [
+export const dataActionFood: actionFoodList[] = [
     {
         id: 1,
         title: "All",

@@ -7,32 +7,32 @@ export const SET_FRIES = "frenchFries";
 export const SET_TOTAL = "setTotal";
 export const CLEAR_TOTAL = "clearTotal";
 
-export type categorieProduct =
+export type foodCategorie =
   | "burger"
   | "pizza"
   | "pasta"
   | "frenchFries"
   | "";
 
-export interface initialStateMenuProducts {
-  categorie: categorieProduct;
+export interface initialStateFood {
+  categorie: foodCategorie;
   idActive: number | string;
   total?: number | null;
 }
 
-const initialState: initialStateMenuProducts = {
+const initialState: initialStateFood = {
   categorie: "",
   idActive: 1,
   total: null,
 };
 
-const FeaturesMenuProducts = createSlice({
+const FeaturesFood = createSlice({
   name: "MenuProducts",
   initialState,
   reducers: {
-    handleSetMenutProducts: (
+    handleSetFood: (
       state,
-      action: PayloadAction<initialStateMenuProducts>
+      action: PayloadAction<initialStateFood>
     ) => {
       switch (action.payload.categorie) {
         case SET_BURGER:
@@ -74,12 +74,12 @@ const FeaturesMenuProducts = createSlice({
       }
     },
 
-    handleClearMenuProduct: () => {
+    handleClearFood: () => {
       return initialState;
     },
   },
 });
 
-export const { handleClearMenuProduct, handleSetMenutProducts, handleTotal } =
-  FeaturesMenuProducts.actions;
-export default FeaturesMenuProducts.reducer;
+export const {handleClearFood, handleSetFood, handleTotal } =
+  FeaturesFood.actions;
+export default FeaturesFood.reducer;

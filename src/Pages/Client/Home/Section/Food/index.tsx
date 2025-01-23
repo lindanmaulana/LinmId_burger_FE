@@ -3,8 +3,6 @@ import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
 import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
 import { ServiceProductsGetAll } from "../../../../../utils/products";
 import STitleSection from "../../../../../Components/Title/titleSection";
-import MenuAction from "./MenuAction";
-import CardMenuProduct from "./CardMenuProduct";
 import ButtonAction from "../../../../../Components/Button/ButtonAction";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../../redux/store";
@@ -12,11 +10,13 @@ import {
   CLEAR_TOTAL,
   handleTotal,
   SET_TOTAL,
-} from "../../../../../redux/slices/client/menuProduct";
+} from "../../../../../redux/slices/client/HomeFood";
+import CardFood from "./CardFood";
+import ActionFood from "./ActionFood";
 
-const OurMenu = () => {
+const Food = () => {
   const { total } = useSelector(
-    (state: RootState) => state.client.menuProducts
+    (state: RootState) => state.client.homeFood
   );
   const dispatch = useDispatch<AppDispatch>();
   const { data, isLoading, isError } = useQuery({
@@ -42,10 +42,10 @@ const OurMenu = () => {
         <div className="flex flex-col items-center gap-8">
           <STitleSection className="text-center">Our Menu</STitleSection>
           <div className="grid w-[40%] grid-cols-5 mb-8">
-            <MenuAction />
+            <ActionFood />
           </div>
           <div className="grid w-full grid-cols-3 gap-7">
-            <CardMenuProduct data={data.data} />
+            <CardFood data={data.data} />
           </div>
           <ButtonAction onClick={handleReadMore} className="flex mx-auto">
             Read More
@@ -56,4 +56,4 @@ const OurMenu = () => {
   );
 };
 
-export default OurMenu;
+export default Food;

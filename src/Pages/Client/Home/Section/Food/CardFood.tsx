@@ -1,19 +1,19 @@
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { useSelector } from "react-redux";
 import ButtonLink from "../../../../../Components/Button/ButtonLink";
-import { categorieProduct } from "../../../../../redux/slices/client/menuProduct";
 import { RootState } from "../../../../../redux/store";
 import { detailProduct } from "../../../../../types/type-product";
 import { baseURLImage } from "../../../../../utils/axiosInstance";
+import { foodCategorie } from "../../../../../redux/slices/client/HomeFood";
 
-export interface CardMenuProductProps {
+export interface CardFoodProps {
   data: detailProduct[];
 }
 
 interface filterDataProps {
   data: detailProduct[],
   total?: number | null
-  categorie: categorieProduct
+  categorie: foodCategorie
 }
 
 const handleFilterData = (props: filterDataProps) => {
@@ -27,9 +27,9 @@ const handleFilterData = (props: filterDataProps) => {
   }
 }  
 
-const CardMenuProduct = (props: CardMenuProductProps) => {
+const CardFood = (props: CardFoodProps) => {
   const { data } = props;
-  const {categorie, total} = useSelector((state: RootState) => state.client.menuProducts)
+  const {categorie, total} = useSelector((state: RootState) => state.client.homeFood)
 
   const dataFilter = handleFilterData({categorie, data, total})
   
@@ -37,11 +37,11 @@ const CardMenuProduct = (props: CardMenuProductProps) => {
     <>
       {dataFilter.map((menu) => (
         <div key={menu._id} className="flex flex-col justify-between text-white bg-primary h-[440px] rounded-2xl overflow-hidden">
-          <figure className="flex items-center justify-center w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey">
+          <figure className="flex items-center justify-center group w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey">
             <img
               src={`${baseURLImage}/${menu.id_image.name}`}
               alt="example"
-              className="w-[50%]"
+              className="w-[50%] group-hover:scale-125 transition-global"
             />
           </figure>
           <div className="p-4 h-[45%] flex flex-col justify-center gap-2">
@@ -62,4 +62,4 @@ const CardMenuProduct = (props: CardMenuProductProps) => {
   );
 };
 
-export default CardMenuProduct;
+export default CardFood;
