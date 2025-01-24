@@ -21,6 +21,7 @@ const SAlert = () => {
       setTimeout(() => {
         dispatch(handleClearTransition())
       }, 200)
+      
     }
   }, [ active, dispatch]);
 

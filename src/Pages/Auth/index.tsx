@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import { ImageBurger } from "../../assets/images/burger";
-import PageAuthPrivacyPolicy from "./PrivacyPolicy";
-import SAlert from "../../components/Alert";
+import SAlert from "../../components/alert";
+import PageAuthPrivacyPolicy from "./privacyPolicy";
 
 const PageAuth = (props: { children: ReactNode }) => {
   return (

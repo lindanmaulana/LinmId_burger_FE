@@ -6,9 +6,9 @@ export interface HomeLabelProps {
   children: ReactNode
 }
 
-const HomeLabel = (props: HomeLabelProps) => {
+const HomeLabelForm = (props: HomeLabelProps) => {
   const { className, htmlFor, children } = props;
   return <label htmlFor={htmlFor} className={`${className} w-full`}>{children}</label>;
 };
 
-export default HomeLabel;
+export default HomeLabelForm;
