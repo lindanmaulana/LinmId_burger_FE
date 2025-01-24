@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Navbar from "../../Components/Navbar/ClientNavbar";
+import Navbar from "../../components/navbar/ClientNavbar";
 export interface pageClientProps {
   children: ReactNode;
 }

@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import SForm from "../../../Components/Form";
-import ErrorFieldMessage from "../../../Components/Form/ErrorFieldMessage";
+import SForm from "../../../components/form";
+import ErrorFieldMessage from "../../../components/form/ErrorFieldMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { useState } from "react";
@@ -18,7 +18,7 @@ import {
 import { IoReload } from "react-icons/io5";
 import { handleSetAlert } from "../../../redux/slices/alertMessage";
 import { errorMessage } from "../../../redux/slices/errorMessage";
-import { initialStateAuth } from "../../../redux/slices/auth";
+import { handleLogin, initialStateAuth } from "../../../redux/slices/auth";
 
 const schema = z.object({
   username: z
@@ -62,8 +62,8 @@ const PageAuthLogin = () => {
   const handleFormLogin = handleSubmit((data: ILogin) => {
     dispatch(handleIsLoading({ type: SET_LOADING }));
     mutate(data, {
-      onSuccess: (data: { data: initialStateAuth }) => {
-        const { role } = data.data;
+      onSuccess: (data: initialStateAuth) => {
+        const { role } = data;
 
         if (!role || typeof role !== "string") {
           dispatch(
@@ -86,7 +86,7 @@ const PageAuthLogin = () => {
             })
           );
 
-          return navigate("/auth/login")
+          return navigate("/auth/login");
         }
 
         dispatch(
@@ -97,9 +97,11 @@ const PageAuthLogin = () => {
             transition: true,
           })
         );
-        reset();
-        dispatch(handleIsLoading({ type: CLEAR_LOADING }));
 
+        dispatch(handleLogin(data))
+        dispatch(handleIsLoading({ type: CLEAR_LOADING }));
+        
+        reset();
         const targetRoute = roleRoutes[role] || "/auth/login";
         navigate(targetRoute);
       },

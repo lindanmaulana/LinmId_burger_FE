@@ -2,7 +2,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import ButtonLink from "../../Button/ButtonLink";
+import ButtonLink from "../../button/ButtonLink";
 
 const NavAction = () => {
   return (

@@ -1,11 +1,11 @@
 import { SwiperSlide } from "swiper/react";
 import { ImageBurger } from "../../../../../assets/images/burger";
-import ButtonLink from "../../../../../Components/Button/ButtonLink";
-import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
-import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
-import SSwiper from "../../../../../Components/Swiper";
-import { dataBannerList } from "./types";
 import { Autoplay, Pagination } from "swiper/modules";
+import SSwiper from "../../../../../components/swiper";
+import { dataBannerList } from "./types";
+import LayoutSection from "../../../../../components/layouts/LayoutSection";
+import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
+import ButtonLink from "../../../../../components/button/ButtonLink";
 
 const HeroBanner = () => {
   return (
@@ -19,7 +19,7 @@ const HeroBanner = () => {
           pagination={{ dynamicBullets: true, clickable: true }}
           modules={[Pagination, Autoplay]}
           loop={true}
-          autoplay={{delay: 3000, disabledOnInteraction: false}}
+          autoplay={{ delay: 3000, disabledOnInteraction: false }}
           speed={1000}
         >
           {dataBannerList?.map((banner) => (

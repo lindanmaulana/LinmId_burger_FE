@@ -1,7 +1,8 @@
-import About from "./Section/About";
-import Food from "./Section/Food";
-import HeroBanner from "./Section/HeroBanner";
-import Offer from "./Section/Offer";
+import About from "./section/about";
+import Food from "./section/food";
+import HeroBanner from "./section/heroBanner";
+import Offer from "./section/offer";
+import Reservation from "./section/reservation";
 
 const PageHome = () => {
   return (
@@ -10,6 +11,7 @@ const PageHome = () => {
       <Offer />
       <Food />
       <About />
+      <Reservation />
     </>
   );
 };

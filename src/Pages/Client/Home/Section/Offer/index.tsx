@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import ButtonLink from "../../../../../Components/Button/ButtonLink";
-import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
-import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
+import ButtonLink from "../../../../../components/button/ButtonLink";
+import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
+import LayoutSection from "../../../../../components/layouts/LayoutSection";
 import { ServiceDiscountsGetAll } from "../../../../../utils/discounts";
 import CardOffer from "./CardOffer";
 

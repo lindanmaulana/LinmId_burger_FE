@@ -13,7 +13,7 @@ export const ServiceAuthRegister = async (data: IRegister) => {
   try {
     const response = await api.post(`${baseURL}/auth/signup`, data);
 
-    return response.data
+    return response.data.data
   } catch (err) {
     errorService(err)
   }
@@ -23,7 +23,7 @@ export const ServiceAuthLogin = async (data: ILogin) => {
   try {
     const response = await api.post(`${baseURL}/auth/signin`, data)
 
-    return response.data
+    return response.data.data
   } catch (err) {
     errorService(err)
   }

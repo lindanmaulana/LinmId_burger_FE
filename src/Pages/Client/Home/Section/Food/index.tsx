@@ -1,9 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
-import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
-import { ServiceProductsGetAll } from "../../../../../utils/products";
-import STitleSection from "../../../../../Components/Title/titleSection";
-import ButtonAction from "../../../../../Components/Button/ButtonAction";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../../redux/store";
 import {
@@ -11,18 +5,19 @@ import {
   handleTotal,
   SET_TOTAL,
 } from "../../../../../redux/slices/client/HomeFood";
+
+import ButtonAction from "../../../../../components/button/ButtonAction";
+import LayoutSection from "../../../../../components/layouts/LayoutSection";
+import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
+import STitleSection from "../../../../../components/title/titleSection";
+import ActionFood from "./ActionDataFood";
 import CardFood from "./CardFood";
-import ActionFood from "./ActionFood";
+import useQueryProducts from "../../../../../hooks/query/products/useQueryProducts";
 
 const Food = () => {
-  const { total } = useSelector(
-    (state: RootState) => state.client.homeFood
-  );
+  const { total } = useSelector((state: RootState) => state.client.homeFood);
   const dispatch = useDispatch<AppDispatch>();
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["queryGetAllProducts"],
-    queryFn: () => ServiceProductsGetAll(),
-  });
+  const { data, isLoading, isError } = useQueryProducts();
 
   if (isLoading) return <p>Loading...</p>;
 

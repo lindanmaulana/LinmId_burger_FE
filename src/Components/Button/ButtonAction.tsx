@@ -2,13 +2,15 @@ import { ReactNode } from "react";
 
 export interface buttonActionProps {
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
+  type?: "submit" | "button" | "reset";
 }
 const ButtonAction = (props: buttonActionProps) => {
-  const { className, onClick, children } = props;
+  const { className, onClick, children, type } = props;
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${className} px-5 py-2 text-sm text-white rounded-full bg-devOrange`}
     >

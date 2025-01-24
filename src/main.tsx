@@ -4,14 +4,15 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import PageAuth from "./Pages/Auth/index.tsx";
-import PageDashboard from "./Pages/Dashboard/index.tsx";
 import { listen } from "./redux/listener.ts";
 import store from "./redux/store.ts";
 import RouterAuth from "./routes/auth/index.tsx";
 import RouterClient from "./routes/client/index.tsx";
-import PageClient from "./Pages/Client/index.tsx";
-import "swiper/css"
+import PageClient from "./pages/client/index.tsx";
+import "swiper/css";
+import GuestGuard from "./routes/guards/GuestGuard.tsx";
+import PageAuth from "./pages/auth/index.tsx";
+import PageDashboard from "./pages/dashboard/index.tsx";
 
 listen();
 
@@ -27,9 +28,11 @@ const router = createBrowserRouter([
   {
     path: "/auth/*",
     element: (
-      <PageAuth>
-        <RouterAuth />
-      </PageAuth>
+      <GuestGuard>
+        <PageAuth>
+          <RouterAuth />
+        </PageAuth>
+      </GuestGuard>
     ),
   },
   {

@@ -1,8 +1,8 @@
 import { ImageBurger } from "../../../../../assets/images/burger";
-import ButtonLink from "../../../../../Components/Button/ButtonLink";
-import LayoutContainer from "../../../../../Components/Layouts/LayoutContainer";
-import LayoutSection from "../../../../../Components/Layouts/LayoutSection";
-import STitleSection from "../../../../../Components/Title/titleSection";
+import ButtonLink from "../../../../../components/button/ButtonLink";
+import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
+import LayoutSection from "../../../../../components/layouts/LayoutSection";
+import STitleSection from "../../../../../components/title/titleSection";
 
 const About = () => {
   return (

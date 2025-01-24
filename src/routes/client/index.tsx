@@ -1,15 +1,15 @@
-import { useRoutes } from "react-router-dom"
-import PageHome from "../../Pages/Client/Home"
+import { useRoutes } from "react-router-dom";
+import PageHome from "../../pages/client/home";
 
 const RouterClient = () => {
-    const router = useRoutes([
-        {
-            index: true,
-            element: <PageHome />
-        }
-    ])
+  const router = useRoutes([
+    {
+      index: true,
+      element: <PageHome />,
+    },
+  ]);
 
-    return router
-}
+  return router;
+};
 
-export default RouterClient
+export default RouterClient;

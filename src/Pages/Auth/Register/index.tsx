@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import SForm from "../../../Components/Form";
-import ErrorFieldMessage from "../../../Components/Form/ErrorFieldMessage";
+import SForm from "../../../components/form";
 import { handleSetAlert } from "../../../redux/slices/alertMessage";
 import { errorMessage } from "../../../redux/slices/errorMessage";
 import {
@@ -22,6 +21,7 @@ import {
   SET_LOADING,
 } from "../../../redux/slices/isLoading";
 import { IoReload } from "react-icons/io5";
+import ErrorFieldMessage from "../../../components/form/ErrorFieldMessage";
 
 const schema = z.object({
   username: z
@@ -227,7 +227,11 @@ const PageAuthRegister = () => {
             }  p-3 rounded-lg text-white flex items-center justify-center`}
             disabled={!selectorPrivacy.agreement}
           >
-            {selectorLoading.loading ? <IoReload className="text-2xl animate-spin" /> : "Buat Akun"}
+            {selectorLoading.loading ? (
+              <IoReload className="text-2xl animate-spin" />
+            ) : (
+              "Buat Akun"
+            )}
           </button>
           <p className="text-sm text-center text-primary/80">
             Kamu sudah memiliki akun ?{" "}
