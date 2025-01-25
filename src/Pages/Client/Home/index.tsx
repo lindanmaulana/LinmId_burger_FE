@@ -1,9 +1,9 @@
-import About from "./section/about";
+import SAbout from "../../../components/about";
+import SReservation from "../../../components/reservation";
 import CustomerReviews from "./section/customerReviews";
 import Food from "./section/food";
 import HeroBanner from "./section/heroBanner";
 import Offer from "./section/offer";
-import Reservation from "./section/reservation";
 
 const PageHome = () => {
   return (
@@ -11,8 +11,8 @@ const PageHome = () => {
       <HeroBanner />
       <Offer />
       <Food />
-      <About />
-      <Reservation />
+      <SAbout />
+      <SReservation />
       <CustomerReviews />
     </>
   );

@@ -1,11 +1,11 @@
-import SAlert from "../../../../../components/alert";
-import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
-import LayoutSection from "../../../../../components/layouts/LayoutSection";
-import STitleSection from "../../../../../components/title/titleSection";
+import SAlert from "../alert";
+import LayoutContainer from "../layouts/LayoutContainer";
+import LayoutSection from "../layouts/LayoutSection";
+import STitleSection from "../title/titleSection";
 import BookReservation from "./BookReservation";
 import LocationReservation from "./LocationReservation";
 
-const Reservation = () => {
+const SReservation = () => {
   return (
     <LayoutSection className="py-20">
       <LayoutContainer className="max-w-6xl">
@@ -20,4 +20,4 @@ const Reservation = () => {
   );
 };
 
-export default Reservation;
+export default SReservation;

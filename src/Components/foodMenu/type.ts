@@ -1,4 +1,4 @@
-import { foodCategorie, SET_BURGER, SET_FRIES, SET_PASTA, SET_PIZZA } from "../../../../../redux/slices/client/HomeFood"
+import { foodCategorie, SET_BURGER, SET_FRIES, SET_PASTA, SET_PIZZA } from "../../redux/slices/client/HomeFood"
 
 export interface actionFoodList {
     id: number | string

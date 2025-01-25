@@ -1,10 +1,11 @@
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { useSelector } from "react-redux";
-import ButtonLink from "../../../../../components/button/ButtonLink";
-import { RootState } from "../../../../../redux/store";
-import { detailProduct } from "../../../../../types/type-product";
-import { baseURLImage } from "../../../../../utils/axiosInstance";
-import { foodCategorie } from "../../../../../redux/slices/client/HomeFood";
+import ButtonLink from "../button/ButtonLink";
+import { RootState } from "../../redux/store";
+import { detailProduct } from "../../types/type-product";
+import { baseURLImage } from "../../utils/axiosInstance";
+import { foodCategorie } from "../../redux/slices/client/HomeFood";
+import { Link } from "react-router-dom";
 
 export interface CardFoodProps {
   data: detailProduct[];
@@ -29,7 +30,7 @@ const handleFilterData = (props: filterDataProps) => {
   }
 };
 
-const CardFood = (props: CardFoodProps) => {
+const CardFoodMenu = (props: CardFoodProps) => {
   const { data } = props;
   const { categorie, total } = useSelector(
     (state: RootState) => state.client.homeFood
@@ -40,7 +41,8 @@ const CardFood = (props: CardFoodProps) => {
   return (
     <>
       {dataFilter.map((menu) => (
-        <div
+        <Link
+          to={`/product/detail/${menu._id}`}
           key={menu._id}
           className="flex flex-col justify-between text-white bg-primary h-[440px] rounded-2xl overflow-hidden"
         >
@@ -61,10 +63,10 @@ const CardFood = (props: CardFoodProps) => {
               </ButtonLink>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );
 };
 
-export default CardFood;
+export default CardFoodMenu;

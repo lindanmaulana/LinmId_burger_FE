@@ -1,10 +1,11 @@
-import { ImageBurger } from "../../../../../assets/images/burger";
-import ButtonLink from "../../../../../components/button/ButtonLink";
-import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
-import LayoutSection from "../../../../../components/layouts/LayoutSection";
-import STitleSection from "../../../../../components/title/titleSection";
+import { ImageBurger } from "../../assets/images/burger";
+import ButtonLink from "../button/ButtonLink";
+import LayoutContainer from "../layouts/LayoutContainer";
+import LayoutSection from "../layouts/LayoutSection";
+import STitleSection from "../title/titleSection";
 
-const About = () => {
+
+const SAbout = () => {
   return (
     <LayoutSection className="py-10 bg-primary">
       <LayoutContainer className="max-w-6xl">
@@ -35,4 +36,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default SAbout;

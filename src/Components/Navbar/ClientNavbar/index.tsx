@@ -1,9 +1,14 @@
+import { useMatches } from "react-router-dom";
 import NavAction from "./NavAction";
 import NavList from "./NavList";
-
+const paths = ["/"]
 const Navbar = () => {
+  const params = useMatches()
+
+  const styleNav = paths.includes(params[0].pathname)
+  
   return (
-    <div className="absolute top-0 right-0 z-50 w-full">
+    <div className={`${styleNav ? "bg-transparent absolute top-0 right-0" : "bg-primary"}  z-50 w-full`}>
       <div className="container flex items-center justify-between max-w-6xl py-6">
         <h1 className="text-3xl text-white font-dancing-script-bold">Linmid</h1>
         <NavList />

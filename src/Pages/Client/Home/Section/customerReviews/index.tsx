@@ -14,7 +14,7 @@ const CustomerReviews = () => {
 
   if (errorReviews) return <p>Error...</p>;
   return (
-    <LayoutSection className="py-10">
+    <LayoutSection className="pt-10 pb-20">
       <LayoutContainer className="max-w-6xl">
         <STitleSection className="mb-12 text-center">
           What Say Our Customers

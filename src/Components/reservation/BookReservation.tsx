@@ -5,24 +5,24 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import ButtonAction from "../../../../../components/button/ButtonAction";
-import useQueryTable from "../../../../../hooks/query/tables/useQueryTable";
-import useReduxAuth from "../../../../../hooks/redux/useReduxAuth";
-import { handleSetAlert } from "../../../../../redux/slices/alertMessage";
-import { errorMessage } from "../../../../../redux/slices/errorMessage";
+import ButtonAction from "../button/ButtonAction";
+import useQueryTable from "../../hooks/query/tables/useQueryTable";
+import useReduxAuth from "../../hooks/redux/useReduxAuth";
+import { handleSetAlert } from "../../redux/slices/alertMessage";
+import { errorMessage } from "../../redux/slices/errorMessage";
 import {
   CLEAR_LOADING,
   handleIsLoading,
   SET_LOADING,
-} from "../../../../../redux/slices/isLoading";
-import { AppDispatch } from "../../../../../redux/store";
-import { table } from "../../../../../types/type-tables";
+} from "../../redux/slices/isLoading";
+import { AppDispatch } from "../../redux/store";
+import { table } from "../../types/type-tables";
 import {
   reservationsCreate,
   ServiceReservationsCreate,
-} from "../../../../../utils/reservations";
-import HomeLabelForm from "../../components/form/label";
-import HomeErrorForm from "../../components/form/error";
+} from "../../utils/reservations";
+import HomeLabelForm from "../../pages/client/home/components/form/label";
+import HomeErrorForm from "../../pages/client/home/components/form/error";
 
 const schema = z.object({
   id_table: z.string(),

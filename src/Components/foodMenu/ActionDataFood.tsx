@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
+import { handleSetFood, initialStateFood } from "../../redux/slices/client/HomeFood";
 import { dataActionFood } from "./type";
-import { handleSetFood, initialStateFood } from "../../../../../redux/slices/client/HomeFood";
 
 const ActionFood = () => {
     const dispatch = useDispatch<AppDispatch>()
