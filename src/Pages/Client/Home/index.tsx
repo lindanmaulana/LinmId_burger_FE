@@ -1,4 +1,5 @@
 import About from "./section/about";
+import CustomerReviews from "./section/customerReviews";
 import Food from "./section/food";
 import HeroBanner from "./section/heroBanner";
 import Offer from "./section/offer";
@@ -12,6 +13,7 @@ const PageHome = () => {
       <Food />
       <About />
       <Reservation />
+      <CustomerReviews />
     </>
   );
 };

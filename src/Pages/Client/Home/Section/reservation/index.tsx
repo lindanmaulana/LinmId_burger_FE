@@ -7,7 +7,7 @@ import LocationReservation from "./LocationReservation";
 
 const Reservation = () => {
   return (
-    <LayoutSection className="py-10">
+    <LayoutSection className="py-20">
       <LayoutContainer className="max-w-6xl">
         <STitleSection className="mb-6">Reservation Table</STitleSection>
         <div className="grid grid-cols-2 gap-12">
