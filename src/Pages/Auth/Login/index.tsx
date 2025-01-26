@@ -41,7 +41,7 @@ const PageAuthLogin = () => {
   const selectorLoading = useSelector((state: RootState) => state.isLoading);
   const [isPassword, setIsPassword] = useState<boolean>(true);
   const roleRoutes: Record<string, string> = {
-    admin: "/dashboard",
+    admin: "/dashboard/",
     user: "/",
   };
 
@@ -61,6 +61,7 @@ const PageAuthLogin = () => {
 
   const handleFormLogin = handleSubmit((data: ILogin) => {
     dispatch(handleIsLoading({ type: SET_LOADING }));
+    
     mutate(data, {
       onSuccess: (data: initialStateAuth) => {
         const { role } = data;
@@ -98,11 +99,12 @@ const PageAuthLogin = () => {
           })
         );
 
-        dispatch(handleLogin(data))
+        dispatch(handleLogin(data));
         dispatch(handleIsLoading({ type: CLEAR_LOADING }));
-        
+
         reset();
         const targetRoute = roleRoutes[role] || "/auth/login";
+
         navigate(targetRoute);
       },
       onError: (err) => {

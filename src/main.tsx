@@ -13,6 +13,8 @@ import "swiper/css";
 import GuestGuard from "./routes/guards/GuestGuard.tsx";
 import PageAuth from "./pages/auth/index.tsx";
 import PageDashboard from "./pages/dashboard/index.tsx";
+import RouterDashboard from "./routes/dashboard/index.tsx";
+import AdminGuard from "./routes/guards/AdminGuard.tsx";
 
 listen();
 
@@ -36,8 +38,14 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/dashboard",
-    element: <PageDashboard />,
+    path: "/dashboard/*",
+    element: (
+      <AdminGuard>
+        <PageDashboard>
+          <RouterDashboard />
+        </PageDashboard>
+      </AdminGuard>
+    ),
   },
 ]);
 

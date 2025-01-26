@@ -31,7 +31,7 @@ const SAlert = () => {
         active
           ? `block ${transition ? "top-0 opacity-0" : "top-5 opacity-100"}`
           : "top-0 hidden"
-      } transition-global fixed right-1/2 translate-x-1/2`}
+      } transition-global z-50 fixed right-1/2 translate-x-1/2`}
     >
       <div
         className={`${

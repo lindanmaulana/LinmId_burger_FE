@@ -1,11 +1,11 @@
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { useSelector } from "react-redux";
-import ButtonLink from "../button/ButtonLink";
+import { Link } from "react-router-dom";
+import { foodCategorie } from "../../redux/slices/client/HomeFood";
 import { RootState } from "../../redux/store";
 import { detailProduct } from "../../types/type-product";
 import { baseURLImage } from "../../utils/axiosInstance";
-import { foodCategorie } from "../../redux/slices/client/HomeFood";
-import { Link } from "react-router-dom";
+import ButtonAction from "../button/ButtonAction";
 
 export interface CardFoodProps {
   data: detailProduct[];
@@ -58,9 +58,9 @@ const CardFoodMenu = (props: CardFoodProps) => {
             <p className="mb-3 line-clamp-3">{menu.description}</p>
             <div className="flex items-center justify-between">
               <p>{menu.price}</p>
-              <ButtonLink to="" className="!p-3 rounded-full ">
+              <ButtonAction className="!p-3 rounded-full ">
                 <PiShoppingCartSimpleFill className="text-xl" />
-              </ButtonLink>
+              </ButtonAction>
             </div>
           </div>
         </Link>

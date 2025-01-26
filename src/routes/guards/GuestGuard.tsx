@@ -4,9 +4,15 @@ import { guardProps } from "./guard.type";
 
 const GuestGuard = (props: guardProps) => {
   const { children } = props;
-  const { token } = useReduxAuth();
+  const { token, role } = useReduxAuth();
 
-  if (token) return <Navigate to={"/"} replace />;
+  if (token && role === "admin") {
+    return <Navigate to={"/dashboard"} replace />;
+
+  } else if (token && role === "user") {
+    return <Navigate to={"/"} replace />;
+
+  }
 
   return children || <Outlet />;
 };
