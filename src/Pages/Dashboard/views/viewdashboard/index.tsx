@@ -1,9 +1,13 @@
-const ViewDashboard = () => {
-    return (
-        <>
-        
-        </>
-    )
-}
+import BreadCrumbs from "../../../../components/breadcrumbs";
+import DashboardCardData from "./cardData";
 
-export default ViewDashboard
+const ViewDashboard = () => {
+  return (
+      <div className="flex flex-col w-full">
+        <BreadCrumbs />
+        <DashboardCardData />
+      </div>
+  );
+};
+
+export default ViewDashboard;

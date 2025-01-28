@@ -2,8 +2,10 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 
 export const useReduxDashboardHeader = () => {
-    const {profile} = useSelector((state: RootState) => state.dashboard.header)
+    const {profile, sidebar} = useSelector((state: RootState) => state.dashboard.header)
     return {
-        profile
+        profile,
+        sidebar,
+        menu: sidebar.menu
     }
 }

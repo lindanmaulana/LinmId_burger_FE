@@ -7,9 +7,9 @@ const useQueryProducts = () => {
     queryFn: () => ServiceProductsGetAll(),
   });
   return {
-    data,
-    isLoading,
-    isError,
+    dataProducts: data,
+    loadingProducts: isLoading,
+    errorProducts: isError,
   };
 };
 

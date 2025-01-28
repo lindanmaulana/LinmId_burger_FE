@@ -13,7 +13,10 @@ export default {
         devOrangeDark: "#E69C00",
         devBlack: "#0C0C0C",
         devWhiteGrey: "#F1F2F3",
-        devBlue: "#0B5ED7"
+        devBlue: "#0B5ED7",
+        devGray: "#343A40",
+        devGreen: "#198754",
+        devRed: "#DC3545"
       },
       fontFamily: {
         "open-sans-medium": ["open-sans-medium", "serif"],
