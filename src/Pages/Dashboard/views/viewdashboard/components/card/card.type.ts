@@ -8,26 +8,26 @@ export interface card {
 export const dataCard: card[] = [
     {
         id: 1,
-        title: "Products",
-        urlLink: "/dashboard/products",
+        title: "Orders",
+        urlLink: "/dashboard/orders",
         background: "bg-devBlue"
     },
     {
         id: 2,
-        title: "Products",
-        urlLink: "/dashboard/products",
+        title: "Payments",
+        urlLink: "/dashboard/payments",
         background: "bg-devOrange"
     },
     {
         id: 3,
-        title: "Products",
-        urlLink: "/dashboard/products",
+        title: "Users",
+        urlLink: "/dashboard/users",
         background: "bg-devGreen"
     },
     {
         id: 4,
-        title: "Products",
-        urlLink: "/dashboard/products",
+        title: "Reservations",
+        urlLink: "/dashboard/reservations",
         background: "bg-devRed"
     },
 ]

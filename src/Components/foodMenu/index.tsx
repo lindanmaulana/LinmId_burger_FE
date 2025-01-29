@@ -14,11 +14,11 @@ import STitleSection from "../title/titleSection";
 const SFoodMenu = () => {
   const { total } = useSelector((state: RootState) => state.client.homeFood);
   const dispatch = useDispatch<AppDispatch>();
-  const { dataProducts, errorProducts, loadingProducts } = useQueryProducts();
+  const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
 
-  if (loadingProducts) return <p>Loading...</p>;
+  if (loadingProduct) return <p>Loading...</p>;
 
-  if (errorProducts) return <p>Error...</p>;
+  if (errorProduct) return <p>Error...</p>;
 
   const handleReadMore = () => {
     if (total) {
@@ -34,7 +34,7 @@ const SFoodMenu = () => {
         <ActionFood />
       </div>
       <div className="grid w-full grid-cols-3 mb-6 gap-7">
-        <CardFoodMenu data={dataProducts.data} />
+        <CardFoodMenu data={dataProduct.data} />
       </div>
       <ButtonAction onClick={handleReadMore} className="flex mx-auto">
         Read More

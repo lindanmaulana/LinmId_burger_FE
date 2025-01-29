@@ -5,7 +5,7 @@ const DashboardCardData = () => {
     return (
         <div className="grid grid-cols-4 gap-6">
             {dataCard?.map((data: card) => (
-                <Card title={data.title} urlLink={data.urlLink} className={data.background} />
+                <Card key={data.id} title={data.title} urlLink={data.urlLink} className={data.background} />
             ))}
         </div>
     )

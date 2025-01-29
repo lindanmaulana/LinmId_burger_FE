@@ -3,13 +3,13 @@ import { ServiceProductsGetAll } from "../../../utils/products";
 
 const useQueryProducts = () => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["queryProductsGetAll"],
+    queryKey: ["queryProductGetAll"],
     queryFn: () => ServiceProductsGetAll(),
   });
   return {
-    dataProducts: data,
-    loadingProducts: isLoading,
-    errorProducts: isError,
+    dataProduct: data,
+    loadingProduct: isLoading,
+    errorProduct: isError,
   };
 };
 

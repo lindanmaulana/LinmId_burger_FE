@@ -1,17 +1,16 @@
-import BreadCrumbs from "../../../../../components/breadcrumbs";
 import useQueryProducts from "../../../../../hooks/query/products/useQueryProducts";
+import PageDataLayout from "../layouts/PageDataLayout";
 
 const ViewDashboardProducts = () => {
-  const { dataProducts, loadingProducts, errorProducts } = useQueryProducts();
-  if (loadingProducts) return <p> Loading.. </p>;
+  const { dataProduct, loadingProduct, errorProduct } = useQueryProducts();
+  if (loadingProduct) return <p> Loading.. </p>;
 
-  if (errorProducts) return <p>Errorr..</p>;
+  if (errorProduct) return <p>Errorr..</p>;
 
-  console.log(dataProducts)
   return (
-    <>
-      <BreadCrumbs />
-    </>
+    <PageDataLayout>
+      Products
+    </PageDataLayout>
   );
 };
 
