@@ -1,5 +1,6 @@
 import useQueryPayments from "../../../../../hooks/query/payments/useQueryPayments"
 import PageDataLayout from "../layouts/PageDataLayout"
+import PaymentTable from "./PaymentTable"
 
 const ViewDashboardPayments = () => {
     const {dataPayment, loadingPayment, errorPayment} = useQueryPayments()
@@ -7,10 +8,11 @@ const ViewDashboardPayments = () => {
     if(loadingPayment) return <p>Loading...</p>
 
     if(errorPayment) return <p>Error...</p>
-
+    console.log(dataPayment)
     return (
-        <PageDataLayout>
-            Payments
+        <PageDataLayout title="Payments">
+            <div></div>
+            <PaymentTable data={dataPayment.data} />
         </PageDataLayout>
     )
 }
