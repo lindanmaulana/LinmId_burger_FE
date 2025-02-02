@@ -33,9 +33,7 @@ export const ServiceOrderEdit = async (data: ServiceOrderEditData) => {
   setToken(token);
 
   try {
-    const response = await api.patch(`${baseURL}/orders/${data.id}`, {
-      data: data.status
-    })
+    const response = await api.patch(`${baseURL}/orders/${data.id}`, {status: data.status})
 
     return response.data
   } catch (err) {

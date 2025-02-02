@@ -1,54 +1,61 @@
 import { useEffect } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { LuCircleCheckBig } from "react-icons/lu";
-import { RiErrorWarningLine } from "react-icons/ri";
+import { MdOutlineAppRegistration } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { handleClearAlert, handleClearTransition } from "../../redux/slices/alertMessage";
+import {
+  handleClearTransition
+} from "../../redux/slices/confirmationModal";
 import { AppDispatch, RootState } from "../../redux/store";
+import { TbChecks } from "react-icons/tb";
+import { statusOrder } from "../../types/type-orders";
 
-const SConfirmationModal = () => {
+export interface SConfirmationModalProps {
+  confirm: (id: string, status: statusOrder) => void;
+  cancel: () => void;
+}
+
+const SConfirmationModal = (props: SConfirmationModalProps) => {
+  const { cancel, confirm } = props;
   const dispatch = useDispatch<AppDispatch>();
-  const { active, message, transition, type } = useSelector(
-    (state: RootState) => state.alertMessage
+  
+  const { active, message, transition } = useSelector(
+    (state: RootState) => state.confirmationModal
   );
 
   useEffect(() => {
     if (active) {
       setTimeout(() => {
-        dispatch(handleClearAlert());
-      }, 2000);
-
-      setTimeout(() => {
-        dispatch(handleClearTransition())
-      }, 200)
-      
+        dispatch(handleClearTransition());
+      }, 200);
     }
-  }, [ active, dispatch]);
+  }, [active, dispatch]);
 
   return (
     <div
       className={` ${
         active
-          ? `block ${transition ? "top-0 opacity-0" : "top-5 opacity-100"}`
+          ? `block ${transition ? "top-0 opacity-0" : "top-20 opacity-100"}`
           : "top-0 hidden"
-      } transition-global z-50 fixed right-1/2 translate-x-1/2`}
+      } transition-global z-50 fixed right-1/2 translate-x-1/2 px-3 py-1 rounded bg-devGray`}
     >
       <div
-        className={`${
-          type === "error" ? "bg-red-600" : type === "success" ? "bg-blue-600" : "bg-orange-500"
-        } min-w-72 p-3 rounded flex items-center justify-between gap-3`}
+        className={`min-w-72 p-3 rounded flex flex-col gap-6`}
       >
         <p className="flex items-center gap-2 text-sm text-white">
-          {type === "error" ? (
-            <RiErrorWarningLine className="text-xl" />
-          ) : (
-            <LuCircleCheckBig className="text-xl" />
-          )}
+          <MdOutlineAppRegistration className="text-xl" />
           {message}
         </p>
-        <button onClick={() => dispatch(handleClearAlert())} className="px-2 text-xl text-white border-l">
-          <IoCloseCircleOutline />
-        </button>
+        <div className="flex items-center justify-end gap-3">
+          <button onClick={cancel} className="flex items-center gap-2 px-3 py-1 text-sm text-white rounded bg-devRed">
+            <IoCloseCircleOutline /> cancel
+          </button>
+          <button
+            onClick={confirm}
+            className="flex items-center gap-2 px-3 py-1 text-sm text-white rounded bg-devBlue"
+          >
+            <TbChecks /> confirm
+          </button>
+        </div>
       </div>
     </div>
   );

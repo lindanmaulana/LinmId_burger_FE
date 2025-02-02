@@ -24,9 +24,13 @@ const FeaturesConfirmationModal = createSlice({
 
         handleClearConfirmation: () => {
             return initialState
+        },
+
+        handleClearTransition: (state) => {
+            return {...state, transition: false}
         }
     }
 })
 
-export const {handleClearConfirmation, handleSetConfirmationModal} = FeaturesConfirmationModal.actions
+export const {handleClearConfirmation, handleSetConfirmationModal, handleClearTransition} = FeaturesConfirmationModal.actions
 export default FeaturesConfirmationModal.reducer

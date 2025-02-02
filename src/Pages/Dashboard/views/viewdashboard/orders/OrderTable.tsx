@@ -1,0 +1,74 @@
+import { dataOrder, statusOrder } from "../../../../../types/type-orders";
+import { helperFormatDate } from "../../../../../utils/helpers/formatDate";
+import Table from "../components/table";
+import Tbody from "../components/table/Tbody";
+import TbodyItem from "../components/table/TbodyTd";
+import TbodyTr from "../components/table/TbodyTr";
+import Thead from "../components/table/Thead";
+
+export interface OrderTableProps {
+  data: dataOrder[];
+  handleActionOrder: (id: string, message: string, status: statusOrder) => void
+}
+const OrderTable = (props: OrderTableProps) => {
+  const { data, handleActionOrder } = props;
+  return (
+    <Table>
+      <Thead
+        titleHeading={[
+          "Order id",
+          "User id",
+          "Status",
+          "Total Price",
+          "Date",
+          "",
+          "",
+        ]}
+      />
+      <Tbody>
+        {data?.map((order: dataOrder) => {
+          const orderDate = helperFormatDate(order.createdAt);
+          return (
+            <TbodyTr key={order._id}>
+              <TbodyItem>{order._id}</TbodyItem>
+              <TbodyItem>{order.id_user}</TbodyItem>
+              <TbodyItem>{order.status}</TbodyItem>
+              <TbodyItem>{order.total_price}</TbodyItem>
+              <TbodyItem>{orderDate}</TbodyItem>
+              <TbodyItem>
+                <button
+                  onClick={() => {
+                    handleActionOrder(
+                      order._id,
+                      `Apakah anda yakin untuk cancel order dengan id: ${order._id}`,
+                      "canceled"
+                    );
+                  }}
+                  className="px-6 py-1 text-xs text-white rounded bg-devRed"
+                >
+                  Cancel
+                </button>
+              </TbodyItem>
+              <TbodyItem>
+                <button
+                  onClick={() =>
+                    handleActionOrder(
+                      order._id,
+                      `Apakah anda yakin untuk approve order dengan id: ${order._id}`,
+                      "completed"
+                    )
+                  }
+                  className="px-6 py-1 text-xs text-white rounded bg-devBlue"
+                >
+                  Approve
+                </button>
+              </TbodyItem>
+            </TbodyTr>
+          );
+        })}
+      </Tbody>
+    </Table>
+  );
+};
+
+export default OrderTable;

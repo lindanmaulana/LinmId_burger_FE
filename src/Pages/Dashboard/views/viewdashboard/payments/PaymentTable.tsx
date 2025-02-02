@@ -7,6 +7,7 @@ import { dataPayment } from "./payment.type";
 
 export interface PaymentTableProps {
   data: dataPayment[];
+  handleActionPayment: (id: string, status: string) => void
 }
 
 const PaymentTable = (props: PaymentTableProps) => {
@@ -21,6 +22,8 @@ const PaymentTable = (props: PaymentTableProps) => {
           "Method",
           "Date",
           "Status",
+          "",
+          ""
         ]}
       />
       <Tbody>
@@ -32,6 +35,12 @@ const PaymentTable = (props: PaymentTableProps) => {
             <TbodyItem>{payment.method}</TbodyItem>
             <TbodyItem>{payment.payment_date}</TbodyItem>
             <TbodyItem>{payment.status}</TbodyItem>
+            <TbodyItem>
+              <button></button>
+            </TbodyItem>
+            <TbodyItem>
+              <button></button>
+            </TbodyItem>
           </TbodyTr>
         ))}
       </Tbody>
