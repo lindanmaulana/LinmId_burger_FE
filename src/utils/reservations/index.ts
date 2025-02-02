@@ -1,4 +1,3 @@
-import { getDataSignin } from "..";
 import { api, baseURL, setToken } from "../axiosInstance";
 import { errorService } from "../errors/errorService";
 
@@ -9,10 +8,14 @@ export interface reservationsCreate {
   guest_count: number | string;
 }
 
-const { token } = getDataSignin();
-
 export const ServiceReservationsCreate = async (data: reservationsCreate) => {
+  const storage = localStorage.getItem("auth");
+
+  const { token }: { token: string | null; role: string | null } = storage
+    ? JSON.parse(storage)
+    : { token: null, role: null };
   setToken(token);
+
   try {
     const response = await api.post(`${baseURL}/reservations`, data);
 
@@ -23,7 +26,13 @@ export const ServiceReservationsCreate = async (data: reservationsCreate) => {
 };
 
 export const ServiceReservationsGetAll = async () => {
+  const storage = localStorage.getItem("auth");
+
+  const { token }: { token: string | null; role: string | null } = storage
+    ? JSON.parse(storage)
+    : { token: null, role: null };
   setToken(token);
+  
   try {
     const response = await api.get(`${baseURL}/reservations`);
 

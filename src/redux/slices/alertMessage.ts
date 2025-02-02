@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-export type IType = "success" | "error"
+export type IType = "success" | "error" | "pending"
 
 export interface initialStateAlert {
     type: IType

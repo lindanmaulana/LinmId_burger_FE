@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleClearAlert, handleClearTransition } from "../../redux/slices/alertMessage";
 import { AppDispatch, RootState } from "../../redux/store";
 
-const SAlert = () => {
+const SConfirmationModal = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { active, message, transition, type } = useSelector(
     (state: RootState) => state.alertMessage
@@ -54,4 +54,4 @@ const SAlert = () => {
   );
 };
 
-export default SAlert;
+export default SConfirmationModal;

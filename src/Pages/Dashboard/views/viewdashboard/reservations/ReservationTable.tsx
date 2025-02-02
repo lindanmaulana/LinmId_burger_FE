@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { helperFormatDate } from "../../../../../utils/helpers/formatDate";
 import Table from "../components/table";
 import Tbody from "../components/table/Tbody";
 import TbodyItem from "../components/table/TbodyTd";
@@ -22,21 +24,25 @@ const ReservationTable = (props: ReservationTableProps) => {
           "Date",
           "Time",
           "Status",
+          ""
         ]}
       />
       <Tbody>
-        {data.map((reservation: dataReservation) => (
+        {data.map((reservation: dataReservation) => {
+          const reservationDate = helperFormatDate(reservation.reservation_date)
+          return(
             <TbodyTr>
                 <TbodyItem>{reservation.id_user}</TbodyItem>
                 <TbodyItem>{reservation.id_table.table_number}</TbodyItem>
                 <TbodyItem>{reservation.id_table.seats}</TbodyItem>
                 <TbodyItem>{reservation.guest_count}</TbodyItem>
                 <TbodyItem>{reservation.id_table.location}</TbodyItem>
-                <TbodyItem>{reservation.reservation_date}</TbodyItem>
+                <TbodyItem>{reservationDate}</TbodyItem>
                 <TbodyItem>{reservation.reservation_time}</TbodyItem>
                 <TbodyItem>{reservation.status}</TbodyItem>
+                <TbodyItem><Link to={"/"} className="px-2 py-1 text-xs text-white rounded bg-devBlue">View Detail</Link></TbodyItem>
             </TbodyTr>
-        ))}
+        )})}
       </Tbody>
     </Table>
   );

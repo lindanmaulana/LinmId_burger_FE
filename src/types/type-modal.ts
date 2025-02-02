@@ -1,0 +1,1 @@
+export type IType = "success" | "error" | "pending"

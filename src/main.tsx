@@ -15,6 +15,7 @@ import PageAuth from "./pages/auth/index.tsx";
 import PageDashboard from "./pages/dashboard/index.tsx";
 import RouterDashboard from "./routes/dashboard/index.tsx";
 import AdminGuard from "./routes/guards/AdminGuard.tsx";
+import SAlert from "./components/alert/index.tsx";
 
 listen();
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     path: "/*",
     element: (
       <PageClient>
+        <SAlert />
         <RouterClient />
       </PageClient>
     ),
@@ -32,6 +34,7 @@ const router = createBrowserRouter([
     element: (
       <GuestGuard>
         <PageAuth>
+          <SAlert />
           <RouterAuth />
         </PageAuth>
       </GuestGuard>
@@ -42,6 +45,7 @@ const router = createBrowserRouter([
     element: (
       <AdminGuard>
         <PageDashboard>
+          <SAlert />
           <RouterDashboard />
         </PageDashboard>
       </AdminGuard>

@@ -24,8 +24,8 @@ const RouterDashboard = () => {
       element: <ViewDashboardCategories />
     },
     {
-      path: "orders",
-      element: <ViewDashboardOrders />
+      path: "orders/*",
+      element: <ViewDashboardOrders />,
     },
     {
       path: "payments",

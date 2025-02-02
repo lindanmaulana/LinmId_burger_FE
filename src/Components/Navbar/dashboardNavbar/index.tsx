@@ -12,7 +12,7 @@ const DashboardNavbar = () => {
         dispatch(handleSidebar())
     }
     return (
-        <header className="relative p-4 bg-primary">
+        <header className="absolute top-0 w-full p-4 bg-primary">
             <div className="container flex items-center justify-between max-w-7xl">
                 <div className="flex items-center gap-20">
                     <h2 className="text-xl text-white">LinmId Burger</h2>

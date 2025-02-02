@@ -1,8 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useReduxDashboardHeader } from "../../../hooks/redux/dashboard/useReduxDashboardHeader";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+import { handleLogout } from "../../../redux/slices/auth";
 
 const DashboardNavbarProfileMenu = () => {
   const { profile } = useReduxDashboardHeader();
+  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+  const handleActionLogout = () => {
+    dispatch(handleLogout())
+    
+    navigate("/auth/login")
+  }
   return (
     <div
       className={`${
@@ -19,7 +29,7 @@ const DashboardNavbarProfileMenu = () => {
           </li>
         </div>
         <li className="px-3 py-2 hover:bg-primary/10">
-          <Link to={""}>Logout</Link>
+          <button onClick={handleActionLogout}>Logout</button>
         </li>
       </ul>
     </div>
