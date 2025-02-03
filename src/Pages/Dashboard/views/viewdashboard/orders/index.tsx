@@ -21,6 +21,7 @@ import PageDataLayout from "../layouts/PageDataLayout";
 import OrderTable from "./OrderTable";
 import { statusOrder } from "../../../../../types/type-orders";
 import { ServiceOrderUpdate, ServiceOrderUpdateData } from "../../../../../utils/orders";
+import OrderFilter from "./OrderFilter.tsx";
 
 const ViewDashboardOrders = () => {
   const { dataOrder, errorOrder, loadingOrder, error } = useQueryOrders();
@@ -91,8 +92,7 @@ const ViewDashboardOrders = () => {
   return (
     <PageDataLayout title="Orders">
       <div></div>
-      <OrderTable data={dataOrder.data} handleActionOrder={handleActionOrder} />
-
+      <OrderFilter data={dataOrder.data} handleActionOrder={handleActionOrder} />
       <SConfirmationModal
         confirm={() => status === "completed" ? handleOrder({id: idOrder, status: status}) : handleOrder({id: idOrder, status: status})}
         cancel={handleCancelConfirmation}

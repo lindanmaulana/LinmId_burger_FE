@@ -6,8 +6,8 @@ const Thead = (props: TheadProps) => {
   return (
     <thead>
       <tr className="text-sm text-left">
-        {titleHeading?.map((head: string) => (
-          <th key={head} className="p-2 border border-devBlack/30">
+        {titleHeading?.map((head: string, index: number) => (
+          <th key={index} className="p-2 border border-devBlack/30">
             {head}
           </th>
         ))}

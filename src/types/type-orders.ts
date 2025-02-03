@@ -5,9 +5,9 @@ export type statusOrder =
   | "canceled"
   | "completed";
 
-export interface order {
-  _id: string;
-  id_user: string;
+  export interface order {
+    _id: string;
+    id_user: string;
   status: statusOrder;
   total_price: number;
 }
@@ -17,3 +17,11 @@ export interface dataOrder extends order {
   updateAt: string;
   __v: number;
 }
+
+export const dataOrderStatus: statusOrder[] = [
+  "pending",
+  "paid",
+  "delivered",
+  "canceled",
+  "completed",
+];

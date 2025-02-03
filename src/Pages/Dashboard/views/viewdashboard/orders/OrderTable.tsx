@@ -27,7 +27,7 @@ const OrderTable = (props: OrderTableProps) => {
         ]}
       />
       <Tbody>
-        {data?.map((order: dataOrder) => {
+        {data.length > 0 ? data.map((order: dataOrder) => {
           const orderDate = helperFormatDate(order.createdAt);
           return (
             <TbodyTr key={order._id}>
@@ -79,10 +79,16 @@ const OrderTable = (props: OrderTableProps) => {
               </TbodyItem>
             </TbodyTr>
           );
-        })}
+        }): (
+          <TbodyTr>
+            <TbodyItem className="text-center" colSpan={7}>
+              <p className="text-sm text-red-500">Not found</p>
+            </TbodyItem>
+          </TbodyTr>
+        )}
       </Tbody>
     </Table>
-  );
+  ); 
 };
 
 export default OrderTable;
