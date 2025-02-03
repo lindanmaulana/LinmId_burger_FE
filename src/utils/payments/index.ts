@@ -1,16 +1,44 @@
-import { getDataSignin } from ".."
-import { api, baseURL, setToken } from "../axiosInstance"
-import { errorService } from "../errors/errorService"
-
-const {token} = getDataSignin()
+import { paymentStatus } from "../../pages/dashboard/views/viewdashboard/payments/payment.type";
+import { authSession } from "../../types/type-auth";
+import { api, baseURL, setToken } from "../axiosInstance";
+import { errorService } from "../errors/errorService";
 
 export const ServicePaymentsGetAll = async () => {
-    setToken(token)
-    try {
-        const response = await api.get(`${baseURL}/payments`)
+  const storage = localStorage.getItem("auth");
 
-        return response.data
-    } catch (err) {
-        errorService(err)
-    }
+  const { token }: authSession = storage
+    ? JSON.parse(storage)
+    : { token: null, role: null };
+  setToken(token);
+
+  try {
+    const response = await api.get(`${baseURL}/payments`);
+
+    return response.data;
+  } catch (err) {
+    errorService(err);
+  }
+};
+
+export interface ServicePaymentsUpdateData {
+  id: string;
+  status: paymentStatus;
 }
+export const ServicePaymentsUpdate = async (data: ServicePaymentsUpdateData) => {
+  const storage = localStorage.getItem("auth");
+
+  const { token }: authSession = storage
+    ? JSON.parse(storage)
+    : { token: null, role: null };
+  setToken(token);
+
+  try {
+    const response = await api.patch(`${baseURL}/payments/${data.id}`, {
+      status: data.status,
+    });
+
+    return response.data;
+  } catch (err) {
+    errorService(err);
+  }
+};

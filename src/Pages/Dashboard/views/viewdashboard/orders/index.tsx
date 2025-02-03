@@ -17,13 +17,10 @@ import {
 } from "../../../../../redux/slices/isLoading";
 import { AppDispatch } from "../../../../../redux/store";
 import { errorMessage } from "../../../../../utils/errors/errorMessage";
-import {
-  ServiceOrderEdit,
-  ServiceOrderEditData,
-} from "../../../../../utils/orders";
 import PageDataLayout from "../layouts/PageDataLayout";
 import OrderTable from "./OrderTable";
 import { statusOrder } from "../../../../../types/type-orders";
+import { ServiceOrderUpdate, ServiceOrderUpdateData } from "../../../../../utils/orders";
 
 const ViewDashboardOrders = () => {
   const { dataOrder, errorOrder, loadingOrder, error } = useQueryOrders();
@@ -33,15 +30,15 @@ const ViewDashboardOrders = () => {
   const [status, setStatus] = useState<statusOrder>("pending")
 
   const { mutate } = useMutation({
-    mutationKey: ["mutateOrderEdit"],
-    mutationFn: (data: ServiceOrderEditData) => ServiceOrderEdit(data),
+    mutationKey: ["mutateOrderUpdate"],
+    mutationFn: (data: ServiceOrderUpdateData) => ServiceOrderUpdate(data),
   });
 
   if (loadingOrder) return <SLoadingData>Loading...</SLoadingData>;
 
   if (errorOrder) return <SErrorData>{error?.message}</SErrorData>;
 
-  const handleOrder = (data: ServiceOrderEditData) => {
+  const handleOrder = (data: ServiceOrderUpdateData) => {
     dispatch(handleIsLoading({ type: SET_LOADING }));
     dispatch(handleClearConfirmation())
 

@@ -20,11 +20,11 @@ export const ServiceOrdersGetAll = async () => {
   }
 };
 
-export interface ServiceOrderEditData {
+export interface ServiceOrderUpdateData {
   id: string
   status: statusOrder
 }
-export const ServiceOrderEdit = async (data: ServiceOrderEditData) => {
+export const ServiceOrderUpdate = async (data: ServiceOrderUpdateData) => {
   const storage = localStorage.getItem("auth");
 
   const { token }: authSession = storage

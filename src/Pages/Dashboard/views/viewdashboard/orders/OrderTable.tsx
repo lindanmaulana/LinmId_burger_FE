@@ -1,17 +1,18 @@
 import { dataOrder, statusOrder } from "../../../../../types/type-orders";
 import { helperFormatDate } from "../../../../../utils/helpers/formatDate";
-import Table from "../components/table";
-import Tbody from "../components/table/Tbody";
-import TbodyItem from "../components/table/TbodyTd";
-import TbodyTr from "../components/table/TbodyTr";
-import Thead from "../components/table/Thead";
+import Table from "../../../components/table";
+import Tbody from "../../../components/table/Tbody";
+import TbodyItem from "../../../components/table/TbodyTd";
+import TbodyTr from "../../../components/table/TbodyTr";
+import Thead from "../../../components/table/Thead";
 
 export interface OrderTableProps {
   data: dataOrder[];
-  handleActionOrder: (id: string, message: string, status: statusOrder) => void
+  handleActionOrder: (id: string, message: string, status: statusOrder) => void;
 }
 const OrderTable = (props: OrderTableProps) => {
   const { data, handleActionOrder } = props;
+
   return (
     <Table>
       <Thead
@@ -32,7 +33,20 @@ const OrderTable = (props: OrderTableProps) => {
             <TbodyTr key={order._id}>
               <TbodyItem>{order._id}</TbodyItem>
               <TbodyItem>{order.id_user}</TbodyItem>
-              <TbodyItem>{order.status}</TbodyItem>
+              <TbodyItem className="text-center">
+                <p
+                  className={`
+                    ${
+                      order.status === "canceled"
+                        ? "bg-red-500"
+                        : order.status === "pending"
+                        ? "bg-yellow-500"
+                        : "bg-blue-500"
+                    } rounded text-white text-xs px-2 py-1`}
+                >
+                  {order.status}
+                </p>
+              </TbodyItem>
               <TbodyItem>{order.total_price}</TbodyItem>
               <TbodyItem>{orderDate}</TbodyItem>
               <TbodyItem>

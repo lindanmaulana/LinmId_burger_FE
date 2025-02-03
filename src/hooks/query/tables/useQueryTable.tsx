@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ServiceTableGetAll } from "../../../utils/tables"
 
 const useQueryTable = () => {
-    const {data, isLoading, isError} = useQuery({
+    const {data, isLoading, isError, error} = useQuery({
         queryKey: ["queryTableGetAll"],
         queryFn: () => ServiceTableGetAll()
     })
@@ -10,7 +10,8 @@ const useQueryTable = () => {
   return {
     dataTable: data,
     loadingTable: isLoading, 
-    errorTable: isError
+    errorTable: isError,
+    error
   }
 }
 

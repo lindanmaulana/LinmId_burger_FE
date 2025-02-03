@@ -1,4 +1,4 @@
-import { order } from "../orders/order.type";
+import { order } from "../../../../../types/type-orders";
 
 
 export type paymentMethod = "bank" | "transfer" | "cash";
