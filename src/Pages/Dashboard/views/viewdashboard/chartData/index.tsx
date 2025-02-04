@@ -1,11 +1,11 @@
 import ChartDataOrders from "./ChartOrders"
-import ChartDataReviews from "./ChartReviews"
+import ChartDataReservation from "./ChartReservation"
 
 const DashboardChartData = () => {
     return (
         <div className="grid grid-cols-2 gap-6">
             <ChartDataOrders />
-            <ChartDataReviews />
+            <ChartDataReservation />
         </div>
     )
 }

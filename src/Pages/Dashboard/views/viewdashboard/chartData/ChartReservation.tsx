@@ -1,30 +1,46 @@
 import { LuChartColumnBig } from "react-icons/lu";
-import useQueryReservations from "../../../../../hooks/query/reservations/useQueryReservations";
-import { getFieldValues } from "../../../../../utils/helpers/getFieldValues";
-import BarChart from "../components/chart/BarChart";
-import { reservation, table } from "../reservations/reservations.type";
-import SLoadingData from "../../../../../components/loading/LoadingData";
 import SErrorData from "../../../../../components/error/ErrorData";
+import SLoadingData from "../../../../../components/loading/LoadingData";
+import useQueryReservations from "../../../../../hooks/query/reservations/useQueryReservations";
+import BarChart from "../components/chart/BarChart";
+import { reservation } from "../reservations/reservations.type";
 
-const ChartDataReviews = () => {
+const ChartDataReservation = () => {
   const { dataReservation, loadingReservation, errorReservation, error} = useQueryReservations();
   if (loadingReservation) return <SLoadingData>Loading...</SLoadingData>;
 
   if (errorReservation) return <SErrorData>{error?.message}</SErrorData>;
 
-  const reservationsTable = getFieldValues<reservation, "id_table">(dataReservation.data, "id_table")
-  const reservationsGuestCount = getFieldValues<reservation, "guest_count">(dataReservation.data, "guest_count")
-  const reservationTableNumber = reservationsTable.map((reservation: table) => reservation.table_number)
+  const reservationsData = dataReservation.data.map((reservation: reservation) => ({
+    tableNumber: reservation.id_table.table_number, // Ambil nomor meja
+    guestCount: reservation.guest_count, // Ambil jumlah tamu
+  }));
   
+  // Kelompokkan data berdasarkan table_number
+  const aggregatedData: Record<number, number> = {};
+  
+  reservationsData.forEach((a: {tableNumber: number, guestCount: number}) => {
+    const tableNumber = a.tableNumber
+    const guestCount = a.guestCount
+    if (!aggregatedData[tableNumber]) {
+      aggregatedData[tableNumber] = 0;
+    }
+    aggregatedData[tableNumber] += guestCount; // Akumulasi jumlah tamu di meja yang sama
+  });
+  
+  const labels = Object.keys(aggregatedData); // X-axis (Nomor Meja)
+  const guestCounts = Object.values(aggregatedData); // Y-axis (Total Guest Count)
+  
+  // Data untuk chart
   const data = {
-    labels: reservationTableNumber,
+    labels: labels.map((label: string) => `Table number ${label}`),
     datasets: [
       {
-        label: "Revenue",
+        label: "Total Guests",
         backgroundColor: "rgba(2,117,216,1)",
         borderColor: "rgba(2,117,216,1)",
         borderWidth: 1,
-        data: reservationsGuestCount
+        data: guestCounts,
       }
     ]
   };
@@ -65,4 +81,4 @@ const ChartDataReviews = () => {
   );
 };
 
-export default ChartDataReviews;
+export default ChartDataReservation;
