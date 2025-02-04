@@ -6,7 +6,7 @@ import Tbody from "../../../components/table/Tbody";
 import TbodyItem from "../../../components/table/TbodyTd";
 import TbodyTr from "../../../components/table/TbodyTr";
 import Thead from "../../../components/table/Thead";
-import { dataPayment, paymentStatus } from "./payment.type";
+import { dataPayment, paymentStatus } from "../../../../../types/type-payments";
 
 export interface PaymentTableProps {
   data: dataPayment[];
@@ -34,20 +34,21 @@ const PaymentTable = (props: PaymentTableProps) => {
         ]}
       />
       <Tbody>
-        {data.map((payment: dataPayment) => {
-          const paymentDate = helperFormatDate(payment.payment_date);
-          return (
-            <TbodyTr key={payment._id}>
-              <TbodyItem>
-                {payment.id_order ? payment.id_order._id : null}
-              </TbodyItem>
-              <TbodyItem>{payment.id_user}</TbodyItem>
-              <TbodyItem>{payment.amount}</TbodyItem>
-              <TbodyItem>{payment.method}</TbodyItem>
-              <TbodyItem>{paymentDate}</TbodyItem>
-              <TbodyItem className="text-center">
-                <p
-                  className={`
+        {data.length > 0 ? (
+          data.map((payment: dataPayment) => {
+            const paymentDate = helperFormatDate(payment.payment_date);
+            return (
+              <TbodyTr key={payment._id}>
+                <TbodyItem>
+                  {payment.id_order ? payment.id_order._id : null}
+                </TbodyItem>
+                <TbodyItem>{payment.id_user}</TbodyItem>
+                <TbodyItem>{payment.amount}</TbodyItem>
+                <TbodyItem>{payment.method}</TbodyItem>
+                <TbodyItem>{paymentDate}</TbodyItem>
+                <TbodyItem className="text-center">
+                  <p
+                    className={`
                     ${
                       payment.status === "failed"
                         ? "bg-red-500"
@@ -55,35 +56,42 @@ const PaymentTable = (props: PaymentTableProps) => {
                         ? "bg-yellow-500"
                         : "bg-blue-500"
                     } rounded text-white text-xs px-2 py-1`}
-                >
-                  {payment.status}
-                </p>
-              </TbodyItem>
-              <TbodyItem>
-                <ButtonCancel
-                  onClick={() =>
-                    handleActionPayment(
-                      payment._id,
-                      `Apakah anda yakin untuk cancel payment dengan id: ${payment._id}`,
-                      "failed"
-                    )
-                  }
-                />
-              </TbodyItem>
-              <TbodyItem>
-                <ButtonApprove
-                  onClick={() =>
-                    handleActionPayment(
-                      payment._id,
-                      `Aapakah anda yakin untuk approve payment dengan id: ${payment._id}`,
-                      "completed"
-                    )
-                  }
-                />
-              </TbodyItem>
-            </TbodyTr>
-          );
-        })}
+                  >
+                    {payment.status}
+                  </p>
+                </TbodyItem>
+                <TbodyItem>
+                  <ButtonCancel
+                    onClick={() =>
+                      handleActionPayment(
+                        payment._id,
+                        `Apakah anda yakin untuk cancel payment dengan id: ${payment._id}`,
+                        "failed"
+                      )
+                    }
+                  />
+                </TbodyItem>
+                <TbodyItem>
+                  <ButtonApprove
+                    onClick={() =>
+                      handleActionPayment(
+                        payment._id,
+                        `Aapakah anda yakin untuk approve payment dengan id: ${payment._id}`,
+                        "completed"
+                      )
+                    }
+                  />
+                </TbodyItem>
+              </TbodyTr>
+            );
+          })
+        ) : (
+          <TbodyTr>
+            <TbodyItem className="text-center" colSpan={8}>
+              <p className="text-sm text-red-500">Not found</p>
+            </TbodyItem>
+          </TbodyTr>
+        )}
       </Tbody>
     </Table>
   );

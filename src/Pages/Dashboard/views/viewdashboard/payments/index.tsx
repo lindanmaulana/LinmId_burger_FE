@@ -10,8 +10,8 @@ import { CLEAR_LOADING, handleIsLoading, SET_LOADING } from "../../../../../redu
 import { AppDispatch } from "../../../../../redux/store"
 import { ServicePaymentsUpdate, ServicePaymentsUpdateData } from "../../../../../utils/payments"
 import PageDataLayout from "../layouts/PageDataLayout"
-import { paymentStatus } from "./payment.type"
-import PaymentTable from "./PaymentTable"
+import PaymentFilter from "./PaymentFilter"
+import { paymentStatus } from "../../../../../types/type-payments"
 
 const ViewDashboardPayments = () => {
     const {dataPayment, loadingPayment, errorPayment} = useQueryPayments()
@@ -75,7 +75,7 @@ const ViewDashboardPayments = () => {
     return (
         <PageDataLayout title="Payments">
             <div></div>
-            <PaymentTable data={dataPayment.data} handleActionPayment={handleActionPayment} />
+            <PaymentFilter data={dataPayment.data} handleActionPayment={handleActionPayment} />
             <SConfirmationModal confirm={() => handlePayment({id: idPayment, status: status})} cancel={handleCancelConfirmation} />
         </PageDataLayout>
     )

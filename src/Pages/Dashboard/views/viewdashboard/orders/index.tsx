@@ -18,7 +18,6 @@ import {
 import { AppDispatch } from "../../../../../redux/store";
 import { errorMessage } from "../../../../../utils/errors/errorMessage";
 import PageDataLayout from "../layouts/PageDataLayout";
-import OrderTable from "./OrderTable";
 import { statusOrder } from "../../../../../types/type-orders";
 import { ServiceOrderUpdate, ServiceOrderUpdateData } from "../../../../../utils/orders";
 import OrderFilter from "./OrderFilter.tsx";

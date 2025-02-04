@@ -20,7 +20,7 @@ export interface OrderFilterState {
 
 const OrderFilter = (props: OrderFilterProps) => {
   const { data, handleActionOrder } = props;
-  const [dataOrder, setDataOrder] = useState<dataOrder[] | []>(data);
+  const [dataOrders, setDataOrders] = useState<dataOrder[] | []>(data);
   const [isSortTotalPrice, setIsSortTotalPrice] = useState<boolean>(false);
 
   // filter by status
@@ -28,10 +28,10 @@ const OrderFilter = (props: OrderFilterProps) => {
     const filter = e.target.value;
 
     if (filter === "") {
-      setDataOrder(data);
+      setDataOrders(data);
     } else {
       const orders = data.filter((order: order) => order.status === filter);
-      setDataOrder(orders);
+      setDataOrders(orders);
     }
 
     setIsSortTotalPrice(false);
@@ -42,15 +42,15 @@ const OrderFilter = (props: OrderFilterProps) => {
     setIsSortTotalPrice(!isSortTotalPrice);
 
     if (isSortTotalPrice) {
-      const sortData = [...dataOrder].sort(
+      const sortData = [...dataOrders].sort(
         (a, b) => a.total_price - b.total_price
       );
-      setDataOrder(sortData);
+      setDataOrders(sortData);
     } else {
-      const sortData = [...dataOrder].sort(
+      const sortData = [...dataOrders].sort(
         (a, b) => b.total_price - a.total_price
       );
-      setDataOrder(sortData);
+      setDataOrders(sortData);
     }
   };
 
@@ -59,7 +59,7 @@ const OrderFilter = (props: OrderFilterProps) => {
     const filter = e.target.value;
 
     if (!filter) {
-      setDataOrder([...dataOrder]);
+      setDataOrders([...dataOrders]);
     }
 
     const filterDataOrders = data.filter((order: dataOrder) => {
@@ -68,14 +68,14 @@ const OrderFilter = (props: OrderFilterProps) => {
       return orderDate === filter;
     });
 
-    setDataOrder(filterDataOrders);
+    setDataOrders(filterDataOrders);
     setIsSortTotalPrice(false);
   };
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between gap-4 font-open-sans-regular">
-        <button className="px-2 text-sm text-white rounded bg-devRed" onClick={() => setDataOrder(data)}>Reset</button>
+        <button className="px-2 text-sm text-white rounded bg-devRed" onClick={() => setDataOrders(data)}>Reset</button>
         <div className="flex items-center gap-4">
           <label
             htmlFor="filterDate"
@@ -112,7 +112,7 @@ const OrderFilter = (props: OrderFilterProps) => {
           </label>
         </div>
       </div>
-      <OrderTable data={dataOrder} handleActionOrder={handleActionOrder} />
+      <OrderTable data={dataOrders} handleActionOrder={handleActionOrder} />
     </div>
   );
 };
