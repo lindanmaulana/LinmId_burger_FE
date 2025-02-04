@@ -1,6 +1,6 @@
+import { dataReservation, table } from "../../../../../types/type-reservations";
 import { getFieldValues } from "../../../../../utils/helpers/getFieldValues";
 import DoughnutChart from "../components/chart/DoughnutChart";
-import { dataReservation, table } from "./reservations.type";
 
 export interface ReservationChartProps {
   data: dataReservation[];

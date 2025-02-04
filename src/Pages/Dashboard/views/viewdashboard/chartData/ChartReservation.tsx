@@ -3,7 +3,7 @@ import SErrorData from "../../../../../components/error/ErrorData";
 import SLoadingData from "../../../../../components/loading/LoadingData";
 import useQueryReservations from "../../../../../hooks/query/reservations/useQueryReservations";
 import BarChart from "../components/chart/BarChart";
-import { reservation } from "../reservations/reservations.type";
+import { reservation } from "../../../../../types/type-reservations";
 
 const ChartDataReservation = () => {
   const { dataReservation, loadingReservation, errorReservation, error} = useQueryReservations();
