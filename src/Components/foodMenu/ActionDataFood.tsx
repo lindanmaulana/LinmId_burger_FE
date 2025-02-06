@@ -6,7 +6,7 @@ import { dataActionFood } from "./type";
 const ActionFood = () => {
     const dispatch = useDispatch<AppDispatch>()
   const { idActive } = useSelector(
-    (state: RootState) => state.client.homeFood
+    (state: RootState) => state.client.FeaturesHomeFood
   );
   
   const HandleClickFoodMenu = (data: initialStateFood) => {

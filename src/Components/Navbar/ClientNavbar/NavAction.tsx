@@ -7,7 +7,7 @@ import ButtonLink from "../../button/ButtonLink";
 const NavAction = () => {
   return (
     <div className="flex items-center gap-4 text-lg text-white">
-      <Link to={""}>
+      <Link to={"/profile"}>
         <BsFillPersonFill />
       </Link>
       <Link to={""}>

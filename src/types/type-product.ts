@@ -1,3 +1,5 @@
+import { image } from "./type-image";
+
 export type statusDiscount = "active" | "expired" | "upcoming";
 
 export interface categorie {
@@ -6,10 +8,6 @@ export interface categorie {
   _id: string;
 }
 
-export interface image {
-  name: string;
-  _id: string;
-}
 
 export interface product {
   description: string;

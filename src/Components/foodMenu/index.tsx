@@ -12,7 +12,7 @@ import ButtonAction from "../button/ButtonAction";
 import STitleSection from "../title/titleSection";
 
 const SFoodMenu = () => {
-  const { total } = useSelector((state: RootState) => state.client.homeFood);
+  const { total } = useSelector((state: RootState) => state.client.FeaturesHomeFood);
   const dispatch = useDispatch<AppDispatch>();
   const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
 

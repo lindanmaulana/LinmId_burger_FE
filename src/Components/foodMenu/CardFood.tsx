@@ -33,7 +33,7 @@ const handleFilterData = (props: filterDataProps) => {
 const CardFoodMenu = (props: CardFoodProps) => {
   const { data } = props;
   const { categorie, total } = useSelector(
-    (state: RootState) => state.client.homeFood
+    (state: RootState) => state.client.FeaturesHomeFood
   );
 
   const dataFilter = handleFilterData({ categorie, data, total });

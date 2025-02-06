@@ -1,8 +1,10 @@
 import { combineSlices } from "@reduxjs/toolkit";
-import homeFood from "../slices/client/HomeFood";
+import FeaturesHomeFood from "../slices/client/HomeFood";
+import FeaturesProfile from "../slices/client/Profile.features"
 
 const CombineClient = combineSlices({
-  homeFood,
+  FeaturesHomeFood,
+  FeaturesProfile
 });
 
 export default CombineClient;
