@@ -16,6 +16,7 @@ import PageDashboard from "./pages/dashboard/index.tsx";
 import RouterDashboard from "./routes/dashboard/index.tsx";
 import AdminGuard from "./routes/guards/AdminGuard.tsx";
 import SAlert from "./components/alert/index.tsx";
+import DropdownNavbar from "./components/navbar/dropdownNavbar/index.tsx";
 
 listen();
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     element: (
       <PageClient>
         <SAlert />
+        <DropdownNavbar />
         <RouterClient />
       </PageClient>
     ),

@@ -21,8 +21,8 @@ const ProfileDate = (props: ProfileDateProps) => {
 
 
   return (
-    <div className="flex items-center gap-10 py-5 border-b divide-x-2">
-      <div className="flex flex-col gap-2 px-4">
+    <div className="flex items-center gap-10 border-b divide-x-2">
+      <div className="flex flex-col gap-2 py-4">
         <h3 className="text-sm text-devGray/80">Tanggal daftar</h3>
         <p>{dated.created}</p>
       </div>
