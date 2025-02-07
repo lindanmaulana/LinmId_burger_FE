@@ -29,14 +29,38 @@ export const ServiceUserDetailGetAll = async () => {
 };
 
 export const ServiceUserDetailGetOne = async (id: string) => {
-    const {token} = getDataSignin()
-    setToken(token)
+  const { token } = getDataSignin();
+  setToken(token);
 
-    try {
-        const response = await api.get(`${baseURL}/user-detail/${id}`)
+  try {
+    const response = await api.get(`${baseURL}/user-detail/${id}`);
 
-        return response.data
-    } catch (err) {
-        errorService(err)
-    }
+    return response.data;
+  } catch (err) {
+    errorService(err);
+  }
+};
+
+export interface dataUserDetailUpdate {
+  full_name?: string;
+  birthdate?: string;
+  gender?: string;
+  address?: string;
 }
+
+export interface paramsUserDetailUpdate {
+  id?: string
+  data: dataUserDetailUpdate
+}
+export const ServiceUserDetailUpdate = async (params: paramsUserDetailUpdate) => {
+  const { token } = getDataSignin();
+
+  setToken(token);
+  try {
+    const response = await api.patch(`${baseURL}/user-detail/${params.id}`, params.data);
+
+    return response.data;
+  } catch (err) {
+    errorService(err);
+  }
+};
