@@ -22,6 +22,7 @@ import {
 } from "../../../utils/users";
 import Label from "./components/form/Label";
 import { ServiceImageCreate } from "../../../utils/images";
+import SErrorData from "../../../components/error/ErrorData";
 
 const schema = z.object({
   full_name: z.string().optional(),
@@ -70,14 +71,6 @@ export interface ProfileUpdateProps {
   profile_picture?: image;
 }
 
-export interface userDetailUpdate {
-  full_name?: string;
-  birthdate?: string;
-  gender?: string;
-  address?: string;
-  profile_picture?: FileList | null | string;
-}
-
 export interface userDetailPayloadUpdate {
   full_name?: string;
   birthdate?: string;
@@ -119,17 +112,16 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
       ServiceUserDetailUpdate({ id: _id, data }),
   });
 
-  const handleFormSubmit = handleSubmit(async (data: userDetailUpdate) => {
+  const handleFormSubmit = handleSubmit(async (data: schemaUserDetail) => {
     const { address, birthdate, full_name, gender, profile_picture } = data;
     dispatch(handleIsLoading({ type: SET_LOADING }));
     let id_image = userImage?._id;
 
     if (profile_picture instanceof FileList && profile_picture.length > 0) {
       const file = profile_picture[0];
+      
       await mutateAsync(file, {
         onSuccess: (data) => {
-          console.log({ dataImage: data });
-          alert("success");
           id_image = data.data._id;
         },
         onError: (err) => {
@@ -197,7 +189,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
               id="profile_picture"
             />
             {errors.profile_picture && (
-              <span>{errors.profile_picture.message}</span>
+              <SErrorData>{errors.profile_picture.message}</SErrorData>
             )}
           </label>
           <div className="flex flex-col gap-6">
@@ -211,7 +203,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={full_name}
               />
-              {errors.full_name && <span>{errors.full_name.message}</span>}
+              {errors.full_name && <SErrorData>{errors.full_name.message}</SErrorData>}
             </Label>
             <Label htmlFor="birthdate">
               <span>Tanggal lahir</span>
@@ -222,7 +214,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={birthdate}
               />
-              {errors.birthdate && <span>{errors.birthdate.message}</span>}
+              {errors.birthdate && <SErrorData>{errors.birthdate.message}</SErrorData>}
             </Label>
             <Label htmlFor="gender">
               <span>Jenis kelamin</span>
@@ -235,7 +227,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
-              {errors.gender && <span>{errors.gender.message}</span>}
+              {errors.gender && <SErrorData>{errors.gender.message}</SErrorData>}
             </Label>
             <Label htmlFor="address">
               <span>Alamat</span>
@@ -246,7 +238,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={address}
               ></textarea>
-              {errors.address && <span>{errors.address.message}</span>}
+              {errors.address && <SErrorData>{errors.address.message}</SErrorData>}
             </Label>
             <div className="flex items-center gap-2 text-sm text-white font-open-sans-regular">
               <button type="reset" className="px-4 py-1 rounded bg-devRed">

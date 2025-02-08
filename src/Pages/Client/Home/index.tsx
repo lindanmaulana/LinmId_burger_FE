@@ -7,14 +7,14 @@ import Offer from "./section/offer";
 
 const PageHome = () => {
   return (
-    <>
+    <main>
       <HeroBanner />
       <Offer />
       <Food />
       <SAbout />
       <SReservation />
       <CustomerReviews />
-    </>
+    </main>
   );
 };
 
