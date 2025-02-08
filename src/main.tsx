@@ -10,6 +10,7 @@ import RouterAuth from "./routes/auth/index.tsx";
 import RouterClient from "./routes/client/index.tsx";
 import PageClient from "./pages/client/index.tsx";
 import "swiper/css";
+import 'react-loading-skeleton/dist/skeleton.css'
 import GuestGuard from "./routes/guards/GuestGuard.tsx";
 import PageAuth from "./pages/auth/index.tsx";
 import PageDashboard from "./pages/dashboard/index.tsx";
