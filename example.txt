@@ -14,49 +14,19 @@ import {
   SET_LOADING,
 } from "../../../redux/slices/isLoading";
 import { AppDispatch } from "../../../redux/store";
-import { image } from "../../../types/type-image";
-import { baseURLImage } from "../../../utils/axiosInstance";
 import {
   dataUserDetailUpdate,
   ServiceUserDetailUpdate,
 } from "../../../utils/users";
 import Label from "./components/form/Label";
-import { ServiceImageCreate } from "../../../utils/images";
+import ProfileUpdateImage from "./ProfileUpdateImage";
+import { image } from "../../../types/type-image";
 
 const schema = z.object({
   full_name: z.string().optional(),
   birthdate: z.string().optional(),
   gender: z.string().optional(),
   address: z.string().optional(),
-  profile_picture: z
-    .union([
-      z
-        .instanceof(FileList)
-        .refine((files) => files.length === 0 || files.length === 1, {
-          message: "Please upload exactly one file.",
-        })
-        .superRefine((files, ctx) => {
-          if (files.length === 1) {
-            const file = files[0];
-            if (!["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "The file must be an image (jpg, png, jpeg, etc).",
-              });
-            }
-            if (file.size > 3000000) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: "Maximum file size is 3MB.",
-              });
-            }
-          }
-        }),
-      z.undefined(),
-      z.null(),
-      z.literal(""),
-    ])
-    .optional(),
 });
 
 type schemaUserDetail = z.infer<typeof schema>;
@@ -67,34 +37,11 @@ export interface ProfileUpdateProps {
   birthdate?: string;
   gender?: string;
   address?: string;
-  profile_picture?: image;
-}
-
-export interface userDetailUpdate {
-  full_name?: string;
-  birthdate?: string;
-  gender?: string;
-  address?: string;
-  profile_picture?: FileList | null | string;
-}
-
-export interface userDetailPayloadUpdate {
-  full_name?: string;
-  birthdate?: string;
-  gender?: string;
-  address?: string;
-  profile_picture?: string;
+  profile_picture?: image
 }
 
 const ProfileUpdate = (props: ProfileUpdateProps) => {
-  const {
-    _id,
-    address,
-    birthdate,
-    full_name,
-    gender,
-    profile_picture: userImage,
-  } = props;
+  const { _id, address, birthdate, full_name, gender, profile_picture } = props;
   const { loading } = useReduxLoading();
   const dispatch = useDispatch<AppDispatch>();
   const queryClient = useQueryClient();
@@ -108,48 +55,16 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync } = useMutation({
-    mutationKey: ["mutateImageCreate"],
-    mutationFn: (file: File) => ServiceImageCreate(file),
-  });
-
   const { mutate } = useMutation({
     mutationKey: ["mutateUserDetailUpdate"],
     mutationFn: (data: dataUserDetailUpdate) =>
       ServiceUserDetailUpdate({ id: _id, data }),
   });
 
-  const handleFormSubmit = handleSubmit(async (data: userDetailUpdate) => {
-    const { address, birthdate, full_name, gender, profile_picture } = data;
+  const handleFormSubmit = handleSubmit((data: dataUserDetailUpdate) => {
     dispatch(handleIsLoading({ type: SET_LOADING }));
-    let id_image = userImage?._id;
 
-    if (profile_picture instanceof FileList && profile_picture.length > 0) {
-      const file = profile_picture[0];
-      await mutateAsync(file, {
-        onSuccess: (data) => {
-          console.log({ dataImage: data });
-          alert("success");
-          id_image = data.data._id;
-        },
-        onError: (err) => {
-          alert(errorMessage(err));
-        },
-      });
-    }
-
-    const payload: userDetailPayloadUpdate = {
-      address,
-      birthdate,
-      full_name,
-      gender,
-    };
-    
-    if (profile_picture instanceof FileList && profile_picture.length > 0) {
-      payload.profile_picture = id_image;
-    }
-
-    await mutate(payload, {
+    mutate(data, {
       onSuccess: (data) => {
         dispatch(handleIsLoading({ type: CLEAR_LOADING }));
         dispatch(
@@ -160,9 +75,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
             type: "success",
           })
         );
-        queryClient.invalidateQueries({
-          queryKey: ["queryUserDetailGetAll"],
-        });
+        queryClient.invalidateQueries({ queryKey: ["queryUserDetailGetAll"] });
         reset();
         dispatch(handleProfileUpdate());
       },
@@ -184,23 +97,14 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
   });
 
   return (
-    <div className="flex items-center w-full gap-8 p-4">
-      <form onSubmit={handleFormSubmit} className="w-full gap-4 py-6">
-        <div className="flex justify-center w-full gap-6 text-sm">
-          <label htmlFor="profile_picture" className="flex flex-col gap-2">
-            <figure className="max-w-64">
-              <img src={`${baseURLImage}/${userImage?.name}`} alt="" />
-            </figure>
-            <input
-              {...register("profile_picture")}
-              type="file"
-              id="profile_picture"
-            />
-            {errors.profile_picture && (
-              <span>{errors.profile_picture.message}</span>
-            )}
-          </label>
-          <div className="flex flex-col gap-6">
+    <div className="flex items-center justify-between">
+      <ProfileUpdateImage imgurl={profile_picture.name} />
+      <div className="flex items-center w-2/3 gap-8 p-4">
+        <form
+          onSubmit={handleFormSubmit}
+          className="flex flex-col w-full gap-4 py-6"
+        >
+          <div className="flex flex-col w-3/4 gap-6 text-sm">
             <Label htmlFor="full_name">
               <span>Nama lengkap</span>
               <input
@@ -224,6 +128,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
               />
               {errors.birthdate && <span>{errors.birthdate.message}</span>}
             </Label>
+
             <Label htmlFor="gender">
               <span>Jenis kelamin</span>
               <select
@@ -237,6 +142,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
               </select>
               {errors.gender && <span>{errors.gender.message}</span>}
             </Label>
+
             <Label htmlFor="address">
               <span>Alamat</span>
               <textarea
@@ -248,25 +154,25 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
               ></textarea>
               {errors.address && <span>{errors.address.message}</span>}
             </Label>
-            <div className="flex items-center gap-2 text-sm text-white font-open-sans-regular">
-              <button type="reset" className="px-4 py-1 rounded bg-devRed">
-                Reset
-              </button>
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-4 py-1 rounded bg-devGreen"
-              >
-                {loading ? (
-                  <IoReload className="text-xl w-11 animate-spin" />
-                ) : (
-                  "Update"
-                )}
-              </button>
-            </div>
           </div>
-        </div>
-      </form>
+          <div className="flex items-center gap-2 text-sm text-white font-open-sans-regular">
+            <button type="reset" className="px-4 py-1 rounded bg-devRed">
+              Reset
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-1 rounded bg-devGreen"
+            >
+              {loading ? (
+                <IoReload className="text-xl w-11 animate-spin" />
+              ) : (
+                "Update"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -35,14 +35,14 @@ const ProfileBio = (props: ProfileDateProps) => {
       </div>
       <div className="flex flex-col gap-2 px-4">
         <h3 className="text-sm text-devGray/80">Tanggal lahir</h3>
-        <p>{birthdate ? birthdate : "-"}</p>
+        <p>{dated.birthdate ? dated.birthdate : "-"}</p>
       </div>
       <div className="flex flex-col gap-2 px-4">
-        <h3 className="text-sm text-devGray/80">Gender</h3>
+        <h3 className="text-sm text-devGray/80">Jenis kelamin</h3>
         <p>{gender}</p>
       </div>
       <div className="flex flex-col gap-2 px-4">
-        <h3 className="text-sm text-devGray/80">Address</h3>
+        <h3 className="text-sm text-devGray/80">Alamat</h3>
         <p>{address}</p>
       </div>
     </div>

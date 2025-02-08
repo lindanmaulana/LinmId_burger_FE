@@ -46,6 +46,7 @@ export interface dataUserDetailUpdate {
   birthdate?: string;
   gender?: string;
   address?: string;
+  profile_picture?: string
 }
 
 export interface paramsUserDetailUpdate {
