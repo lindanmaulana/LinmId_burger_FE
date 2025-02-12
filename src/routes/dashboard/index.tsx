@@ -8,6 +8,7 @@ import ViewDashboardOrders from "../../pages/dashboard/views/viewdashboard/order
 import ViewDashboardPayments from "../../pages/dashboard/views/viewdashboard/payments";
 import ViewDashboardUsers from "../../pages/dashboard/views/viewdashboard/users";
 import ViewDashboardReservations from "../../pages/dashboard/views/viewdashboard/reservations";
+import ViewProductDiscount from "../../pages/dashboard/views/viewProducts";
 
 const RouterDashboard = () => {
   const router = useRoutes([
@@ -47,6 +48,10 @@ const RouterDashboard = () => {
         </ViewMenu>
       ),
     },
+    {
+      path: "product-discount",
+      element: <ViewProductDiscount />
+    }
   ]);
   return router;
 };

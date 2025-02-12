@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SET_DAFTARMENU, SET_USERS } from "./const";
+import { SET_DAFTARMENU, SET_PRODUCT_DISCOUNT, SET_USERS } from "./const";
 
 export interface initialStateHeader {
   sidebar: {
@@ -11,6 +11,9 @@ export interface initialStateHeader {
       users: {
         active: boolean;
       };
+      productDiscount: {
+        active: boolean
+      }
     };
   };
   profile: {
@@ -28,6 +31,9 @@ const initialState: initialStateHeader = {
       users: {
         active: false,
       },
+      productDiscount: {
+        active: false
+      }
     },
   },
   profile: {
@@ -56,6 +62,8 @@ const FeaturesHeaderDashboard = createSlice({
         case SET_USERS:
           state.sidebar.menu.users.active = !state.sidebar.menu.users.active;
           break;
+        case SET_PRODUCT_DISCOUNT:
+          state.sidebar.menu.productDiscount.active = !state.sidebar.menu.productDiscount.active
       }
     },
   },

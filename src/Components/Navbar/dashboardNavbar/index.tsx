@@ -4,6 +4,7 @@ import DashboardNavbarProfileMenu from "./DashboardNavbarProfileMenu"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../../redux/store"
 import { handleSidebar } from "../../../redux/slices/dashboard/header"
+import { Link } from "react-router-dom"
 
 const DashboardNavbar = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -15,7 +16,7 @@ const DashboardNavbar = () => {
         <header className="absolute top-0 w-full p-4 bg-primary">
             <div className="container flex items-center justify-between max-w-7xl">
                 <div className="flex items-center gap-20">
-                    <h2 className="text-xl text-white">LinmId Burger</h2>
+                    <Link to={"/"} className="text-xl text-white">LinmId Burger</Link>
                     <button onClick={handleMenuSidebar} className="text-white"><RxHamburgerMenu /></button>
                 </div>
                 <DashboardNavbarAction />

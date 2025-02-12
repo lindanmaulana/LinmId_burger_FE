@@ -23,6 +23,10 @@ const OrderFilter = (props: OrderFilterProps) => {
   const [dataOrders, setDataOrders] = useState<dataOrder[] | []>(data);
   const [isSortTotalPrice, setIsSortTotalPrice] = useState<boolean>(false);
 
+  const handleReset = () => {
+    setDataOrders(data)
+    setIsSortTotalPrice(false)
+  }
   // filter by status
   const handleFilterStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const filter = e.target.value;
@@ -75,7 +79,7 @@ const OrderFilter = (props: OrderFilterProps) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between gap-4 font-open-sans-regular">
-        <button className="px-2 text-sm text-white rounded bg-devRed" onClick={() => setDataOrders(data)}>Reset</button>
+        <button className="px-2 text-sm text-white rounded bg-devRed" onClick={handleReset}>Reset</button>
         <div className="flex items-center gap-4">
           <label
             htmlFor="filterDate"

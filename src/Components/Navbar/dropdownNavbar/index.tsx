@@ -8,37 +8,51 @@ import useReduxNavbar from "../../../hooks/redux/useReduxNavbar";
 import { handleLogout } from "../../../redux/slices/auth";
 import { handleDropdownNavbar } from "../../../redux/slices/navbar.features";
 import { AppDispatch } from "../../../redux/store";
+import useReduxAuth from "../../../hooks/redux/useReduxAuth";
+import { RxDashboard } from "react-icons/rx";
 
 const enableDropdownMenu = ["/auth/login", "/auth/register"];
 
 const DropdownNavbar = () => {
+  const { role } = useReduxAuth();
   const { pathname } = useLocation();
   const { dropdownNavbar } = useReduxNavbar();
-  const dispatch = useDispatch<AppDispatch>()
-  const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const handleDropdown = () => {
-    dispatch(handleDropdownNavbar())
-  }
+    dispatch(handleDropdownNavbar());
+  };
 
   const handleDropdownLogout = () => {
-    dispatch(handleLogout())
+    dispatch(handleLogout());
 
-    navigate("/auth/login")
-  }
+    navigate("/auth/login");
+  };
 
   const handleDropdownNavigate = (url: string) => {
-    dispatch(handleDropdownNavbar())
+    dispatch(handleDropdownNavbar());
 
-    navigate(url)
-  }
-  
+    navigate(url);
+  };
+
   return (
     <>
       {!enableDropdownMenu.includes(pathname) && (
         <div className="fixed flex flex-col items-center gap-2 right-6 bottom-6">
-          <nav className={`${dropdownNavbar ? "h-28 p-2 opacity-100" : "h-0 opacity-0"}  rounded-xl bg-devGray transition-global`}>
+          <nav
+            className={`${
+              dropdownNavbar ? "h-36 p-2 opacity-100" : "h-0 opacity-0"
+            }  rounded-xl bg-devGray transition-global`}
+          >
             <ul className="flex flex-col h-full gap-3 text-white ">
+              {role === "admin" && (
+                <li className="flex items-center w-full h-full ">
+                  <button onClick={() => handleDropdownNavigate("/dashboard")}>
+                    <RxDashboard className="text-lg" />
+                  </button>
+                </li>
+              )}
               <li className="flex items-center w-full h-full ">
                 <button onClick={() => handleDropdownNavigate("/")}>
                   <RiHome9Line className="text-lg" />
@@ -56,8 +70,15 @@ const DropdownNavbar = () => {
               </li>
             </ul>
           </nav>
-          <button onClick={handleDropdown} className="z-50 p-2 text-white rounded-full bg-devBlack">
-            <AiOutlineSetting className={`${dropdownNavbar ? "rotate-90" : ""} text-2xl transition-global`} />
+          <button
+            onClick={handleDropdown}
+            className="z-50 p-2 text-white rounded-full bg-devBlack"
+          >
+            <AiOutlineSetting
+              className={`${
+                dropdownNavbar ? "rotate-90" : ""
+              } text-2xl transition-global`}
+            />
           </button>
         </div>
       )}

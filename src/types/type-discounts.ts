@@ -14,3 +14,5 @@ export interface discount {
     _id: string
     id_product: product
 }
+
+export const dataStatusDiscount: statusDiscount[] = ["active", "expired", "upcoming"]
