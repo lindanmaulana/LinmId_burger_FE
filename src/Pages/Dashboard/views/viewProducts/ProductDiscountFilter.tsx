@@ -1,9 +1,13 @@
 import { useState } from "react";
-import ProductDiscountTable from "./ProductDiscountTable";
-import { dataStatusDiscount, discount } from "../../../../types/type-discounts";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
-import { helperFormatDate } from "../../../../utils/helpers/formatDate";
+import { dataStatusDiscount, discount } from "../../../../types/type-discounts";
 import { statusDiscount } from "../../../../types/type-product";
+import {
+  filterDate,
+  FilterStatus,
+  FilterTotalPrice,
+} from "../../../../utils/helpers/filterData";
+import ProductDiscountTable from "./ProductDiscountTable";
 
 interface ProductDiscountFilterProps {
   data: discount[];
@@ -21,53 +25,38 @@ const ProductDiscountFilter = (props: ProductDiscountFilterProps) => {
 
   // filter by status
   const handleFilterStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const filter = e.target.value;
-
-    if (filter === "") {
-      setDataProductDiscount(data);
-    } else {
-      const discount = data.filter(
-        (discount: discount) => discount.status === filter
-      );
-      setDataProductDiscount(discount);
-    }
-
-    setSortDiscount(false);
+    FilterStatus({
+      event: e,
+      data,
+      setData: setDataProductDiscount,
+      keyToFilter: "status",
+      setReset: setSortDiscount,
+      valReset: false,
+    });
   };
 
   // filter by totalPrice
   const handleFilterTotalPrice = () => {
-    setSortDiscount(!sortDiscount);
-
-    if (sortDiscount) {
-      const sortData = [...dataProductDiscount].sort(
-        (a, b) => a.discount_percentage - b.discount_percentage
-      );
-      setDataProductDiscount(sortData);
-    } else {
-      const sortData = [...dataProductDiscount].sort(
-        (a, b) => b.discount_percentage - a.discount_percentage
-      );
-      setDataProductDiscount(sortData);
-    }
+    FilterTotalPrice({
+      dataFilter: dataProductDiscount,
+      isSort: sortDiscount,
+      keyFilter: "discount_percentage",
+      setData: setDataProductDiscount,
+      setSort: setSortDiscount,
+    });
   };
 
-  // filter by date
+  // filter by start date
   const handleFilterDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filter = e.target.value;
-
-    if (!filter) {
-      setDataProductDiscount([...dataProductDiscount]);
-    }
-
-    const filterDataOrders = data.filter((order: discount) => {
-      const orderDate = helperFormatDate(order.createdAt).split(",")[0];
-
-      return orderDate === filter;
+    filterDate({
+      data,
+      dataFilter: dataProductDiscount,
+      event: e,
+      isSort: sortDiscount,
+      keyFilter: "start_date",
+      setData: setDataProductDiscount,
+      setSort: setSortDiscount,
     });
-
-    setDataProductDiscount(filterDataOrders);
-    setSortDiscount(false);
   };
 
   return (

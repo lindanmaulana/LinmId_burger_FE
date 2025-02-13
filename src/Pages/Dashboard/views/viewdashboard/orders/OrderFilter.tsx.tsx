@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FaSortDown, FaSortUp } from "react-icons/fa";
 import {
   dataOrder,
   dataOrderStatus,
-  order,
   statusOrder,
 } from "../../../../../types/type-orders";
+import {
+  filterDate,
+  FilterStatus,
+  FilterTotalPrice,
+} from "../../../../../utils/helpers/filterData";
 import OrderTable from "./OrderTable";
-import { helperFormatDate } from "../../../../../utils/helpers/formatDate";
 
 export interface OrderFilterProps {
   data: dataOrder[];
@@ -24,68 +27,65 @@ const OrderFilter = (props: OrderFilterProps) => {
   const [isSortTotalPrice, setIsSortTotalPrice] = useState<boolean>(false);
 
   const handleReset = () => {
-    setDataOrders(data)
-    setIsSortTotalPrice(false)
-  }
+    setDataOrders(data);
+    setIsSortTotalPrice(false);
+  };
   // filter by status
   const handleFilterStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const filter = e.target.value;
-
-    if (filter === "") {
-      setDataOrders(data);
-    } else {
-      const orders = data.filter((order: order) => order.status === filter);
-      setDataOrders(orders);
-    }
-
-    setIsSortTotalPrice(false);
+    FilterStatus({
+      event: e,
+      data,
+      setData: setDataOrders,
+      keyToFilter: "status",
+      valReset: false,
+      setReset: setIsSortTotalPrice,
+    });
   };
 
   // filter by totalPrice
-  const handleFilterTotalPrice = () => {
-    setIsSortTotalPrice(!isSortTotalPrice);
-
-    if (isSortTotalPrice) {
-      const sortData = [...dataOrders].sort(
-        (a, b) => a.total_price - b.total_price
-      );
-      setDataOrders(sortData);
-    } else {
-      const sortData = [...dataOrders].sort(
-        (a, b) => b.total_price - a.total_price
-      );
-      setDataOrders(sortData);
-    }
-  };
+  const handleFilterTotalPrice = useCallback(() => {
+    FilterTotalPrice({
+      dataFilter: dataOrders,
+      isSort: isSortTotalPrice,
+      keyFilter: "total_price",
+      setData: setDataOrders,
+      setSort: setIsSortTotalPrice,
+    });
+  }, [dataOrders, isSortTotalPrice]);
 
   // filter by date
   const handleFilterDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filter = e.target.value;
-
-    if (!filter) {
-      setDataOrders([...dataOrders]);
-    }
-
-    const filterDataOrders = data.filter((order: dataOrder) => {
-      const orderDate = helperFormatDate(order.createdAt).split(",")[0];
-
-      return orderDate === filter;
+    filterDate({
+      data,
+      dataFilter: dataOrders,
+      event: e,
+      isSort: isSortTotalPrice,
+      keyFilter: "createdAt",
+      setData: setDataOrders,
+      setSort: setIsSortTotalPrice,
     });
-
-    setDataOrders(filterDataOrders);
-    setIsSortTotalPrice(false);
   };
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between gap-4 font-open-sans-regular">
-        <button className="px-2 text-sm text-white rounded bg-devRed" onClick={handleReset}>Reset</button>
+        <button
+          className="px-2 text-sm text-white rounded bg-devRed"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
         <div className="flex items-center gap-4">
           <label
             htmlFor="filterDate"
             className="px-1 overflow-hidden text-sm border rounded border-devBlack/20"
           >
-            <input type="date" id="filterDate" onChange={handleFilterDate} className="cursor-pointer" />
+            <input
+              type="date"
+              id="filterDate"
+              onChange={handleFilterDate}
+              className="cursor-pointer"
+            />
           </label>
 
           <button
