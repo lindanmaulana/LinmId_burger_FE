@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import SConfirmationModal from "../../../../../components/confirmationModal";
 import SErrorData from "../../../../../components/error/ErrorData";
 import SLoadingData from "../../../../../components/loading/LoadingData";
-import useQueryOrders from "../../../../../hooks/query/orders/useQueryOrders";
+import useQueryOrders from "../../../../../hooks/query/services/useQueryOrders.ts";
 import { handleSetAlert } from "../../../../../redux/slices/alertMessage";
 import {
   handleClearConfirmation,
@@ -19,15 +19,16 @@ import { AppDispatch } from "../../../../../redux/store";
 import { errorMessage } from "../../../../../utils/errors/errorMessage";
 import PageDataLayout from "../layouts/PageDataLayout";
 import { statusOrder } from "../../../../../types/type-orders";
-import { ServiceOrderUpdate, ServiceOrderUpdateData } from "../../../../../utils/orders";
+
 import OrderFilter from "./OrderFilter.tsx";
+import { ServiceOrderUpdate, ServiceOrderUpdateData } from "../../../../../utils/services/orders.ts";
 
 const ViewDashboardOrders = () => {
   const { dataOrder, errorOrder, loadingOrder, error } = useQueryOrders();
   const queryClient = useQueryClient();
   const dispatch = useDispatch<AppDispatch>();
-  const [idOrder, setIdOrder] = useState<string>("")
-  const [status, setStatus] = useState<statusOrder>("pending")
+  const [idOrder, setIdOrder] = useState<string>("");
+  const [status, setStatus] = useState<statusOrder>("pending");
 
   const { mutate } = useMutation({
     mutationKey: ["mutateOrderUpdate"],
@@ -40,7 +41,7 @@ const ViewDashboardOrders = () => {
 
   const handleOrder = (data: ServiceOrderUpdateData) => {
     dispatch(handleIsLoading({ type: SET_LOADING }));
-    dispatch(handleClearConfirmation())
+    dispatch(handleClearConfirmation());
 
     mutate(data, {
       onSuccess: (data) => {
@@ -71,7 +72,11 @@ const ViewDashboardOrders = () => {
     });
   };
 
-  const handleActionOrder = (id: string, message: string, status: statusOrder) => {
+  const handleActionOrder = (
+    id: string,
+    message: string,
+    status: statusOrder
+  ) => {
     dispatch(
       handleSetConfirmationModal({
         active: true,
@@ -80,8 +85,8 @@ const ViewDashboardOrders = () => {
       })
     );
 
-    setIdOrder(id)
-    setStatus(status)
+    setIdOrder(id);
+    setStatus(status);
   };
 
   const handleCancelConfirmation = () => {
@@ -91,9 +96,16 @@ const ViewDashboardOrders = () => {
   return (
     <PageDataLayout title="Orders">
       <div></div>
-      <OrderFilter data={dataOrder.data} handleActionOrder={handleActionOrder} />
+      <OrderFilter
+        data={dataOrder.data}
+        handleActionOrder={handleActionOrder}
+      />
       <SConfirmationModal
-        confirm={() => status === "completed" ? handleOrder({id: idOrder, status: status}) : handleOrder({id: idOrder, status: status})}
+        confirm={() =>
+          status === "completed"
+            ? handleOrder({ id: idOrder, status: status })
+            : handleOrder({ id: idOrder, status: status })
+        }
         cancel={handleCancelConfirmation}
       />
     </PageDataLayout>

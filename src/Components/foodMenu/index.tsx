@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import useQueryProducts from "../../hooks/query/products/useQueryProducts";
+import useQueryProducts from "../../hooks/query/services/useQueryProducts";
 import {
   CLEAR_TOTAL,
   handleTotal,
@@ -12,7 +12,9 @@ import ButtonAction from "../button/ButtonAction";
 import STitleSection from "../title/titleSection";
 
 const SFoodMenu = () => {
-  const { total } = useSelector((state: RootState) => state.client.FeaturesHomeFood);
+  const { total } = useSelector(
+    (state: RootState) => state.client.FeaturesHomeFood
+  );
   const dispatch = useDispatch<AppDispatch>();
   const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
 

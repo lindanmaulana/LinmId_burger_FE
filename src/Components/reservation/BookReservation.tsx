@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import ButtonAction from "../button/ButtonAction";
-import useQueryTable from "../../hooks/query/tables/useQueryTable";
+import useQueryTable from "../../hooks/query/services/useQueryTable";
 import useReduxAuth from "../../hooks/redux/useReduxAuth";
 import { handleSetAlert } from "../../redux/slices/alertMessage";
 import { errorMessage } from "../../redux/slices/errorMessage";
@@ -20,7 +20,7 @@ import { table } from "../../types/type-tables";
 import {
   reservationsCreate,
   ServiceReservationsCreate,
-} from "../../utils/reservations";
+} from "../../utils/services/reservations";
 import HomeLabelForm from "../../pages/client/home/components/form/label";
 import HomeErrorForm from "../../pages/client/home/components/form/error";
 

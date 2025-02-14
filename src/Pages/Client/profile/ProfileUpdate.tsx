@@ -19,9 +19,9 @@ import { baseURLImage } from "../../../utils/axiosInstance";
 import {
   dataUserDetailUpdate,
   ServiceUserDetailUpdate,
-} from "../../../utils/users";
+} from "../../../utils/services/users";
 import Label from "./components/form/Label";
-import { ServiceImageCreate } from "../../../utils/images";
+import { ServiceImageCreate } from "../../../utils/services/images";
 import SErrorData from "../../../components/error/ErrorData";
 
 const schema = z.object({
@@ -119,7 +119,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
 
     if (profile_picture instanceof FileList && profile_picture.length > 0) {
       const file = profile_picture[0];
-      
+
       await mutateAsync(file, {
         onSuccess: (data) => {
           id_image = data.data._id;
@@ -136,7 +136,7 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
       full_name,
       gender,
     };
-    
+
     if (profile_picture instanceof FileList && profile_picture.length > 0) {
       payload.profile_picture = id_image;
     }
@@ -203,7 +203,9 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={full_name}
               />
-              {errors.full_name && <SErrorData>{errors.full_name.message}</SErrorData>}
+              {errors.full_name && (
+                <SErrorData>{errors.full_name.message}</SErrorData>
+              )}
             </Label>
             <Label htmlFor="birthdate">
               <span>Tanggal lahir</span>
@@ -214,7 +216,9 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={birthdate}
               />
-              {errors.birthdate && <SErrorData>{errors.birthdate.message}</SErrorData>}
+              {errors.birthdate && (
+                <SErrorData>{errors.birthdate.message}</SErrorData>
+              )}
             </Label>
             <Label htmlFor="gender">
               <span>Jenis kelamin</span>
@@ -227,7 +231,9 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
-              {errors.gender && <SErrorData>{errors.gender.message}</SErrorData>}
+              {errors.gender && (
+                <SErrorData>{errors.gender.message}</SErrorData>
+              )}
             </Label>
             <Label htmlFor="address">
               <span>Alamat</span>
@@ -238,7 +244,9 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
                 className="w-full px-2 py-1 border rounded "
                 defaultValue={address}
               ></textarea>
-              {errors.address && <SErrorData>{errors.address.message}</SErrorData>}
+              {errors.address && (
+                <SErrorData>{errors.address.message}</SErrorData>
+              )}
             </Label>
             <div className="flex items-center gap-2 text-sm text-white font-open-sans-regular">
               <button type="reset" className="px-4 py-1 rounded bg-devRed">

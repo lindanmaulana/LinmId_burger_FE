@@ -4,7 +4,7 @@ import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../../../components/layouts/LayoutSection";
 import SSwiper from "../../../../../components/swiper";
 import STitleSection from "../../../../../components/title/titleSection";
-import { useQueryReviews } from "../../../../../hooks/query/reviews/useQueryReviews";
+import { useQueryReviews } from "../../../../../hooks/query/services/useQueryReviews";
 import { review } from "../../../../../types/type-reviews";
 
 const CustomerReviews = () => {

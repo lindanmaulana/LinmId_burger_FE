@@ -1,14 +1,14 @@
 import { LuChartColumnBig } from "react-icons/lu";
 import SErrorData from "../../../../../components/error/ErrorData";
 import SLoadingData from "../../../../../components/loading/LoadingData";
-import useQueryOrders from "../../../../../hooks/query/orders/useQueryOrders";
+import useQueryOrders from "../../../../../hooks/query/services/useQueryOrders";
 import { helperFormatDate } from "../../../../../utils/helpers/formatDate";
 import LineChart from "../components/chart/LineChart";
 import { dataOrder, order } from "../../../../../types/type-orders";
 
 const ChartDataOrders = () => {
   const { dataOrder, errorOrder, loadingOrder, error } = useQueryOrders();
-  
+
   if (loadingOrder) {
     return <SLoadingData>Loading..</SLoadingData>;
   }
@@ -24,10 +24,15 @@ const ChartDataOrders = () => {
   }));
 
   // Urutkan berdasarkan createdAt
-  orderData.sort((a: dataOrder, b: dataOrder) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+  orderData.sort(
+    (a: dataOrder, b: dataOrder) =>
+      new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
 
   // Konversi format tanggal
-  const labels = orderData.map((order: dataOrder) => helperFormatDate(order.createdAt))
+  const labels = orderData.map((order: dataOrder) =>
+    helperFormatDate(order.createdAt)
+  );
 
   // Ambil total price
   const totalPrices = orderData.map((order: order) => order.total_price);
@@ -71,7 +76,7 @@ const ChartDataOrders = () => {
       },
     },
   };
-  
+
   return (
     <div className="border rounded border-primary/30">
       <div className="p-2 bg-primary/10">
@@ -80,7 +85,9 @@ const ChartDataOrders = () => {
           Chart Orders
         </h3>
       </div>
-      <div><LineChart data={data} options={options} /></div>
+      <div>
+        <LineChart data={data} options={options} />
+      </div>
     </div>
   );
 };

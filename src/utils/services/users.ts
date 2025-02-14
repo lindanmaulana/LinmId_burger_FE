@@ -1,4 +1,4 @@
-import { getDataSignin } from "..";
+import { getDataSignin } from "../helpers";
 import { api, baseURL, setToken } from "../axiosInstance";
 import { errorService } from "../errors/errorService";
 

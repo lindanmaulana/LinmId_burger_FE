@@ -1,5 +1,5 @@
-import { paymentStatus } from "../../pages/dashboard/views/viewdashboard/payments/payment.type";
 import { authSession } from "../../types/type-auth";
+import { paymentStatus } from "../../types/type-payments";
 import { api, baseURL, setToken } from "../axiosInstance";
 import { errorService } from "../errors/errorService";
 

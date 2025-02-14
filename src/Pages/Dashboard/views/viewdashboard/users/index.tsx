@@ -1,4 +1,4 @@
-import useQueryUsers from "../../../../../hooks/query/users/useQueryUsers"
+import useQueryUsers from "../../../../../hooks/query/services/useQueryUsers"
 import PageDataLayout from "../layouts/PageDataLayout"
 
 const ViewDashboardUsers = () => {

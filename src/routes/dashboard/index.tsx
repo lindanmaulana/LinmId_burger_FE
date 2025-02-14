@@ -9,6 +9,7 @@ import ViewDashboardPayments from "../../pages/dashboard/views/viewdashboard/pay
 import ViewDashboardUsers from "../../pages/dashboard/views/viewdashboard/users";
 import ViewDashboardReservations from "../../pages/dashboard/views/viewdashboard/reservations";
 import ViewProductDiscount from "../../pages/dashboard/views/viewProducts";
+import ProductDiscountUpdate from "../../pages/dashboard/views/viewProducts/ProductDiscountUpdate";
 
 const RouterDashboard = () => {
   const router = useRoutes([
@@ -17,12 +18,12 @@ const RouterDashboard = () => {
       element: <ViewDashboard />,
     },
     {
-        path: "products",
-        element: <ViewDashboardProducts />
+      path: "products",
+      element: <ViewDashboardProducts />,
     },
     {
       path: "categories",
-      element: <ViewDashboardCategories />
+      element: <ViewDashboardCategories />,
     },
     {
       path: "orders/*",
@@ -30,15 +31,15 @@ const RouterDashboard = () => {
     },
     {
       path: "payments",
-      element: <ViewDashboardPayments />
+      element: <ViewDashboardPayments />,
     },
     {
       path: "users",
-      element: <ViewDashboardUsers />
+      element: <ViewDashboardUsers />,
     },
     {
       path: "reservations",
-      element: <ViewDashboardReservations />
+      element: <ViewDashboardReservations />,
     },
     {
       path: "food/*",
@@ -50,8 +51,12 @@ const RouterDashboard = () => {
     },
     {
       path: "product-discount",
-      element: <ViewProductDiscount />
-    }
+      element: <ViewProductDiscount />,
+    },
+    {
+      path: "product-discount/update/:id",
+      element: <ProductDiscountUpdate />,
+    },
   ]);
   return router;
 };

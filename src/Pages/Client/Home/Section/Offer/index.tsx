@@ -1,12 +1,17 @@
 import ButtonLink from "../../../../../components/button/ButtonLink";
 import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../../../components/layouts/LayoutSection";
-import useQueryProductDiscounts from "../../../../../hooks/query/productDiscount/useQueryProductDIscounts";
+import useQueryProductDiscounts from "../../../../../hooks/query/services/useQueryProductDIscounts";
 import CardOffer from "./CardOffer";
 import OfferSkeleton from "./OfferSkeleton";
 
 const Offer = () => {
-  const { dataProductDiscount, loadingProductDiscount, errorProductDiscount, error } = useQueryProductDiscounts()
+  const {
+    dataProductDiscount,
+    loadingProductDiscount,
+    errorProductDiscount,
+    error,
+  } = useQueryProductDiscounts();
 
   return (
     <LayoutSection className="pt-20 pb-10">
@@ -14,8 +19,8 @@ const Offer = () => {
         <div className="grid grid-cols-2 gap-8 mb-8">
           {loadingProductDiscount ? (
             <>
-            <OfferSkeleton />
-            <OfferSkeleton />
+              <OfferSkeleton />
+              <OfferSkeleton />
             </>
           ) : errorProductDiscount ? (
             <p>{error?.message}</p>

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ServiceProductGetOne } from "../../../utils/products";
+import { ServiceProductGetOne } from "../../../utils/services/products";
 
 const useQueryProductDetail = (id: string | undefined) => {
   const { data, isLoading, isError } = useQuery({

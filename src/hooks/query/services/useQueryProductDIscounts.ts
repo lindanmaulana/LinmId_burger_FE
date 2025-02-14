@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ServiceDiscountsGetAll } from "../../../utils/discounts";
+import { ServiceDiscountsGetAll } from "../../../utils/services/discounts";
 
 const useQueryProductDiscounts = () => {
   const { data, isLoading, isError, error } = useQuery({

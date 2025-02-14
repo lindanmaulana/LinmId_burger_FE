@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { discount } from "../../../../types/type-discounts";
 import { helperFormatDate } from "../../../../utils/helpers/formatDate";
 import Table from "../../components/table";
@@ -17,15 +18,14 @@ const ProductDiscountTable = (props: ProductDiscountTableProps) => {
       <Thead
         titleHeading={[
           "No",
-          "Name",
+          "Product",
           "Category",
           "Price",
           "Status",
-          "TypeDiscount",
+          "Name Discount",
           "Discount",
-          "Start",
-          "End",
-          "",
+          "ValidFrom",
+          "Expired",
           "",
         ]}
       />
@@ -59,10 +59,7 @@ const ProductDiscountTable = (props: ProductDiscountTableProps) => {
               <TbodyItem>{discountStartDate}</TbodyItem>
               <TbodyItem>{discountEndDate}</TbodyItem>
               <TbodyItem>
-                <button>Save</button>
-              </TbodyItem>
-              <TbodyItem>
-                <button>Save</button>
+                <Link to={`/dashboard/product-discount/update/${discount._id}`} className="px-3 py-1 text-xs text-white rounded bg-devGreen">Update</Link>
               </TbodyItem>
             </TbodyTr>
           );

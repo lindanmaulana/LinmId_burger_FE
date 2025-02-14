@@ -4,7 +4,7 @@ import SErrorData from "../../../components/error/ErrorData";
 import LayoutContainer from "../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../components/layouts/LayoutSection";
 import SLoadingData from "../../../components/loading/LoadingData";
-import useQueryUserDetail from "../../../hooks/query/users/useQueryUserDetail";
+import useQueryUserDetail from "../../../hooks/query/services/useQueryUserDetail";
 import useReduxProfile from "../../../hooks/redux/client/useReduxProfile";
 import { AppDispatch } from "../../../redux/store";
 import { dataUserDetail } from "../../../types/type-user-detail";

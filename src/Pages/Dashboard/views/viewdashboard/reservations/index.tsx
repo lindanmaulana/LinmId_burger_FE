@@ -1,4 +1,4 @@
-import useQueryReservations from "../../../../../hooks/query/reservations/useQueryReservations";
+import useQueryReservations from "../../../../../hooks/query/services/useQueryReservations";
 import PageDataLayout from "../layouts/PageDataLayout";
 import ReservationChart from "./ReservationChart";
 import ReservationFilter from "./ReservationFilter";

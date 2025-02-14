@@ -1,4 +1,4 @@
-import useQueryCategories from "../../../../../hooks/query/categories/useQueryCategories";
+import useQueryCategories from "../../../../../hooks/query/services/useQueryCategories";
 import PageDataLayout from "../layouts/PageDataLayout";
 
 const ViewDashboardCategories = () => {

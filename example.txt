@@ -178,3 +178,87 @@ const ProfileUpdate = (props: ProfileUpdateProps) => {
 };
 
 export default ProfileUpdate;
+
+
+// update discount
+ <label
+              htmlFor="nameDiscount"
+              className="flex flex-col items-start w-full gap-2 text-sm"
+            >
+              <span>Name Discount</span>
+              <input
+                type="text"
+                id="nameDiscount"
+                className="w-full px-3 py-2 border border-green-500 rounded"
+              />
+            </label>
+
+            <label htmlFor="status" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Status Discount</span>
+              <select name="" id="" className="w-full px-3 py-2 border border-green-500 rounded">
+                {dataStatusDiscount?.map((discount: statusDiscount) => (
+                  <option value={discount}>{discount}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="flex items-center gap-5">
+            <label
+              htmlFor="totalDiscount"
+              className="flex flex-col items-start w-full gap-2 text-sm"
+            >
+              <span>Discount</span>
+              <input
+                type="text"
+                id="totalDiscount"
+                className="w-full px-3 py-2 border border-green-500 rounded"
+              />
+            </label>
+
+            <label htmlFor="validFrom" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Discount Valid From</span>
+              <input
+                type="date"
+                id="validFrom"
+                className="w-full px-3 py-2 border border-green-500 rounded"
+              />
+            </label>
+            <label htmlFor="expired" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Expired</span>
+              <input
+                type="date"
+                id="expired"
+                className="w-full px-3 py-2 border border-green-500 rounded"
+              />
+            </label>
+          </div>
+          <div className="flex items-center gap-5">
+            <label htmlFor="product" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Product</span>
+              <input
+                type="text"
+                id="product"
+                className="w-full px-3 py-2 border rounded border-devBlack/30"
+                disabled
+              />
+            </label>
+            <label htmlFor="category" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Category</span>
+              <input
+                type="text"
+                id="category"
+                className="w-full px-3 py-2 border rounded border-devBlack/30"
+                disabled
+              />
+            </label>
+            <label htmlFor="price" className="flex flex-col items-start w-full gap-2 text-sm">
+              <span>Price</span>
+              <input
+                type="text"
+                id="price"
+                className="w-full px-3 py-2 border rounded border-devBlack/30"
+                disabled
+              />
+            </label>
+          </div>
+        </div>

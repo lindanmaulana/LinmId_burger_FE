@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ServiceUsersGetAll } from "../../../utils/users";
+import { ServiceUsersGetAll } from "../../../utils/services/users";
 
 const useQueryUsers = () => {
   const { data, isLoading, isError } = useQuery({
@@ -13,5 +13,4 @@ const useQueryUsers = () => {
   };
 };
 
-
-export default useQueryUsers
+export default useQueryUsers;

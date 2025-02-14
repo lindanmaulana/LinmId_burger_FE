@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import LayoutContainer from "../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../components/layouts/LayoutSection";
-import useQueryProductDetail from "../../../hooks/query/products/useQueryProductDetail";
+import useQueryProductDetail from "../../../hooks/query/services/useQueryProductDetail";
 import { baseURLImage } from "../../../utils/axiosInstance";
 import { product } from "../../../types/type-product";
 import { helperFormatCurrency } from "../../../utils/helpers/formatCurrency";

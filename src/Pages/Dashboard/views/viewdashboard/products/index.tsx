@@ -1,4 +1,4 @@
-import useQueryProducts from "../../../../../hooks/query/products/useQueryProducts";
+import useQueryProducts from "../../../../../hooks/query/services/useQueryProducts";
 import PageDataLayout from "../layouts/PageDataLayout";
 
 const ViewDashboardProducts = () => {
@@ -7,11 +7,7 @@ const ViewDashboardProducts = () => {
 
   if (errorProduct) return <p>Errorr..</p>;
 
-  return (
-    <PageDataLayout>
-      Products
-    </PageDataLayout>
-  );
+  return <PageDataLayout>Products</PageDataLayout>;
 };
 
 export default ViewDashboardProducts;
