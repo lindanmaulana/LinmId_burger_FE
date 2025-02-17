@@ -2,7 +2,7 @@ import { SwiperSlide } from "swiper/react";
 import { ImageBurger } from "../../../../../assets/images/burger";
 import { Autoplay, Pagination } from "swiper/modules";
 import SSwiper from "../../../../../components/swiper";
-import { dataBannerList } from "./types";
+import { bannerList, dataBannerList } from "./types";
 import LayoutSection from "../../../../../components/layouts/LayoutSection";
 import LayoutContainer from "../../../../../components/layouts/LayoutContainer";
 import ButtonLink from "../../../../../components/button/ButtonLink";
@@ -22,7 +22,7 @@ const HeroBanner = () => {
           autoplay={{ delay: 3000, disabledOnInteraction: false }}
           speed={1000}
         >
-          {dataBannerList?.map((banner) => (
+          {dataBannerList?.map((banner: bannerList) => (
             <SwiperSlide key={banner.id} className="w-full h-full">
               <div className="flex flex-col items-start justify-center w-full h-full gap-6 ">
                 <h2 className="text-5xl text-white font-dancing-script-bold">

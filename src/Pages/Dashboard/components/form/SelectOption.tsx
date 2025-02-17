@@ -4,7 +4,7 @@ import { FieldValues, UseFormRegister } from "react-hook-form";
 interface SelectOptionProps<T extends FieldValues> {
   children: ReactNode;
   id: string;
-  register: ReturnType<UseFormRegister<T>>;
+  register?: ReturnType<UseFormRegister<T>>;
   classNameSelect?: string;
 }
 const SelectOption = <T extends FieldValues>(props: SelectOptionProps<T>) => {

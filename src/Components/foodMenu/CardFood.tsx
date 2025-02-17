@@ -46,7 +46,8 @@ const CardFoodMenu = (props: CardFoodProps) => {
           key={menu._id}
           className="flex flex-col justify-between text-white bg-primary h-[440px] rounded-2xl overflow-hidden"
         >
-          <figure className="flex items-center justify-center group w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey">
+          <figure className="flex relative items-center justify-center group w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey">
+            <span className="absolute px-2 py-1 text-sm rounded-xl top-3 bg-devGray left-3">Best Seller</span>
             <img
               src={`${baseURLImage}/${menu.id_image.name}`}
               alt="example"
@@ -54,7 +55,7 @@ const CardFoodMenu = (props: CardFoodProps) => {
             />
           </figure>
           <div className="p-4 h-[45%] flex flex-col justify-center gap-2">
-            <h3>{menu.name}</h3>
+            <h3 className="text-xl">{menu.name}</h3>
             <p className="mb-3 line-clamp-3">{menu.description}</p>
             <div className="flex items-center justify-between">
               <p>{menu.price}</p>

@@ -1,15 +1,15 @@
 import { useRoutes } from "react-router-dom";
 import ViewDashboard from "../../pages/dashboard/views/viewdashboard";
-import RouterDashboardMenu from "./menu";
-import ViewMenu from "../../pages/dashboard/views/viewMenu";
-import ViewDashboardProducts from "../../pages/dashboard/views/viewdashboard/products";
 import ViewDashboardCategories from "../../pages/dashboard/views/viewdashboard/categories";
 import ViewDashboardOrders from "../../pages/dashboard/views/viewdashboard/orders";
 import ViewDashboardPayments from "../../pages/dashboard/views/viewdashboard/payments";
-import ViewDashboardUsers from "../../pages/dashboard/views/viewdashboard/users";
+import ViewDashboardProducts from "../../pages/dashboard/views/viewdashboard/products";
 import ViewDashboardReservations from "../../pages/dashboard/views/viewdashboard/reservations";
+import ViewDashboardUsers from "../../pages/dashboard/views/viewdashboard/users";
+import ViewMenu from "../../pages/dashboard/views/viewMenu";
 import ViewProductDiscount from "../../pages/dashboard/views/viewProducts";
-import ProductDiscountUpdate from "../../pages/dashboard/views/viewProducts/ProductDiscountUpdate";
+import RouterDashboardMenu from "./menu";
+import RouterProductDiscount from "./productDiscount";
 
 const RouterDashboard = () => {
   const router = useRoutes([
@@ -50,12 +50,12 @@ const RouterDashboard = () => {
       ),
     },
     {
-      path: "product-discount",
-      element: <ViewProductDiscount />,
-    },
-    {
-      path: "product-discount/update/:id",
-      element: <ProductDiscountUpdate />,
+      path: "product-discount/*",
+      element: (
+        <ViewProductDiscount>
+          <RouterProductDiscount />
+        </ViewProductDiscount>
+      ),
     },
   ]);
   return router;

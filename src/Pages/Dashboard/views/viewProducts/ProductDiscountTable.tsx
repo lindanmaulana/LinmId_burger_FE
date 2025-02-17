@@ -59,7 +59,7 @@ const ProductDiscountTable = (props: ProductDiscountTableProps) => {
               <TbodyItem>{discountStartDate}</TbodyItem>
               <TbodyItem>{discountEndDate}</TbodyItem>
               <TbodyItem>
-                <Link to={`/dashboard/product-discount/update/${discount._id}`} className="px-3 py-1 text-xs text-white rounded bg-devGreen">Update</Link>
+                <Link to={`/dashboard/product-discount/${discount._id}`} className="px-3 py-1 text-xs text-white rounded bg-devGreen">Update</Link>
               </TbodyItem>
             </TbodyTr>
           );

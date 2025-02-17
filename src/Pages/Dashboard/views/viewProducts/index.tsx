@@ -1,25 +1,17 @@
+import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 import BreadCrumbs from "../../../../components/breadcrumbs";
-import useQueryProductDiscounts from "../../../../hooks/query/services/useQueryProductDIscounts";
-import PageDataLayout from "../viewdashboard/layouts/PageDataLayout";
-import ProductDiscountFilter from "./ProductDiscountFilter";
 
-const ViewProductDiscount = () => {
-  const {
-    dataProductDiscount,
-    // error,
-    errorProductDiscount,
-    loadingProductDiscount,
-  } = useQueryProductDiscounts();
+interface ViewProductDiscountProps {
+  children: ReactNode;
+}
+const ViewProductDiscount = (props: ViewProductDiscountProps) => {
+  const { children } = props;
 
-  if (loadingProductDiscount) return <p>Loading...</p>;
-
-  if (errorProductDiscount) return <p>Error...</p>;
   return (
     <>
       <BreadCrumbs />
-      <PageDataLayout title="Product Discount">
-        <ProductDiscountFilter data={dataProductDiscount.data} />
-      </PageDataLayout>
+      {children || <Outlet />}
     </>
   );
 };

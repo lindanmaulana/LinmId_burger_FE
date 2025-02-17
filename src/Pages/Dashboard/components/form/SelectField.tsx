@@ -9,7 +9,7 @@ interface InputFieldProps<T extends FieldValues> {
   id: string;
   classNameLabel?: string;
   classNameSelect?: string;
-  register: ReturnType<UseFormRegister<T>>;
+  register?: ReturnType<UseFormRegister<T>>;
   children?: ReactNode;
 }
 

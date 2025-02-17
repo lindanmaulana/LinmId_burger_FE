@@ -9,7 +9,7 @@ const Navbar = () => {
   
   return (
     <div className={`${styleNav ? "bg-transparent absolute top-0 right-0" : "bg-primary"}  z-50 w-full`}>
-      <div className="container flex items-center justify-between max-w-6xl py-3">
+      <div className="container flex items-center justify-between max-w-6xl py-6">
         <h1 className="text-3xl text-white font-dancing-script-bold">Linmid</h1>
         <NavList />
         <NavAction />
