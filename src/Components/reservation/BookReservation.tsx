@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-import ButtonAction from "../button/ButtonAction";
 import useQueryTable from "../../hooks/query/services/useQueryTable";
 import useReduxAuth from "../../hooks/redux/useReduxAuth";
+import HomeErrorForm from "../../pages/client/home/components/form/error";
+import HomeLabelForm from "../../pages/client/home/components/form/label";
 import { handleSetAlert } from "../../redux/slices/alertMessage";
 import { errorMessage } from "../../redux/slices/errorMessage";
 import {
@@ -17,26 +17,13 @@ import {
 } from "../../redux/slices/isLoading";
 import { AppDispatch } from "../../redux/store";
 import { table } from "../../types/type-tables";
+import { schemaReservation, validateSchemaReservation } from "../../types/validation/validateReservation";
 import {
   reservationsCreate,
   ServiceReservationsCreate,
 } from "../../utils/services/reservations";
-import HomeLabelForm from "../../pages/client/home/components/form/label";
-import HomeErrorForm from "../../pages/client/home/components/form/error";
+import ButtonAction from "../button/ButtonAction";
 
-const schema = z.object({
-  id_table: z.string(),
-  reservation_date: z
-    .string()
-    .refine((val) => !isNaN(Date.parse(val)), "Invalid date format")
-    .transform((val) => new Date(val)),
-  reservation_time: z
-    .string()
-    .regex(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/, "Invalid time format"),
-  guest_count: z.string(),
-});
-
-type schemaBookReservation = z.infer<typeof schema>;
 
 const BookReservation = () => {
   const { dataTable, errorTable, loadingTable } = useQueryTable();
@@ -50,8 +37,8 @@ const BookReservation = () => {
     register,
     formState: { errors },
     reset,
-  } = useForm<schemaBookReservation>({
-    resolver: zodResolver(schema),
+  } = useForm<schemaReservation>({
+    resolver: zodResolver(validateSchemaReservation),
   });
 
   const { mutate } = useMutation({

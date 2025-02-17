@@ -9,9 +9,9 @@ const PageHome = () => {
   return (
     <main>
       <HeroBanner />
+      <SAbout />
       <Offer />
       <Food />
-      <SAbout />
       <SReservation />
       <CustomerReviews />
     </main>

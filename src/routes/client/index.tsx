@@ -1,11 +1,11 @@
 import { useRoutes } from "react-router-dom";
 import PageAbout from "../../pages/client/about";
 import PageBookTable from "../../pages/client/bookTable";
+import PageDetailProduct from "../../pages/client/detail/DetailProduct";
 import PageHome from "../../pages/client/home";
 import PageMenu from "../../pages/client/menu";
-import PageDetailProduct from "../../pages/client/detail/DetailProduct";
+import PageOrder from "../../pages/client/order";
 import PageProfile from "../../pages/client/profile";
-import ProfileUpdate from "../../pages/client/profile/ProfileUpdate";
 
 const RouterClient = () => {
   const router = useRoutes([
@@ -33,6 +33,10 @@ const RouterClient = () => {
       path: "product/detail/:id",
       element: <PageDetailProduct />
     },
+    {
+      path: "order/:id",
+      element: <PageOrder />
+    }
   ]);
 
   return router;

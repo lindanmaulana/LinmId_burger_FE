@@ -2,7 +2,8 @@ import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import ButtonLink from "../../../../../components/button/ButtonLink";
 import { baseURLImage } from "../../../../../utils/axiosInstance";
 import { discount } from "../../../../../types/type-discounts";
-export interface CardOfferProps {
+
+interface CardOfferProps {
   data: discount[];
 }
 const CardOffer = (props: CardOfferProps) => {

@@ -1,26 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { ImageBurger } from "../../assets/images/burger";
 import useQueryProducts from "../../hooks/query/services/useQueryProducts";
+import useReduxFood from "../../hooks/redux/client/useReduxFood";
 import {
   CLEAR_TOTAL,
   handleTotal,
   SET_TOTAL,
 } from "../../redux/slices/client/HomeFood";
-import ActionFood from "./ActionDataFood";
-import CardFoodMenu from "./CardFood";
+import { AppDispatch } from "../../redux/store";
 import ButtonAction from "../button/ButtonAction";
 import STitleSection from "../title/titleSection";
+import ActionFood from "./ActionDataFood";
+import CardFoodMenu from "./CardFood";
+import SkeletonFood from "./SkeletonFood";
 
 const SFoodMenu = () => {
-  const { total } = useSelector(
-    (state: RootState) => state.client.FeaturesHomeFood
-  );
+  const { total } = useReduxFood()
   const dispatch = useDispatch<AppDispatch>();
   const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
-
-  if (loadingProduct) return <p>Loading...</p>;
-
-  if (errorProduct) return <p>Error...</p>;
 
   const handleReadMore = () => {
     if (total) {
@@ -29,6 +26,7 @@ const SFoodMenu = () => {
       dispatch(handleTotal({ type: SET_TOTAL, total: 9 }));
     }
   };
+
   return (
     <div className="flex flex-col items-center gap-8">
       <STitleSection className="text-center">Our Menu</STitleSection>
@@ -36,7 +34,23 @@ const SFoodMenu = () => {
         <ActionFood />
       </div>
       <div className="grid w-full grid-cols-3 mb-6 gap-7">
-        <CardFoodMenu data={dataProduct.data} />
+        {loadingProduct && (
+          <>
+            <SkeletonFood />
+            <SkeletonFood />
+            <SkeletonFood />
+          </>
+        )}
+
+        {errorProduct && (
+          <div className="col-span-3 text-center">
+            <p className="flex items-center justify-center gap-1 font-semibold">
+              <img src={ImageBurger.error404} alt="404" />
+            </p>
+          </div>
+        )}
+
+        {dataProduct && <CardFoodMenu data={dataProduct.data} />}
       </div>
       <ButtonAction onClick={handleReadMore} className="flex mx-auto">
         Read More

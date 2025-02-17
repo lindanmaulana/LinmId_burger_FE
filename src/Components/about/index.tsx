@@ -26,7 +26,7 @@ const SAbout = () => {
               dibuat dengan bahan segar dan berkualitas. Jangan ragu untuk
               mencoba burger legendaris kami yang tidak pernah mengecewakan
             </p>
-            <ButtonLink to="" className="!px-12 !py-3">
+            <ButtonLink to="/about" className="!px-12 !py-3">
               Read More
             </ButtonLink>
           </div>

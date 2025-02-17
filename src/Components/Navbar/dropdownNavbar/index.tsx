@@ -72,7 +72,7 @@ const DropdownNavbar = () => {
           </nav>
           <button
             onClick={handleDropdown}
-            className="z-50 p-2 text-white rounded-full bg-devBlack"
+            className="relative z-50 p-2 text-white rounded-full bg-devBlack"
           >
             <AiOutlineSetting
               className={`${

@@ -39,6 +39,8 @@ type TSwiperProps = {
   pagination?: TPagination
   //   effect
   coverflowEffect?: TCoverflowEffect;
+  slidesOffsetAfter?: number
+  slidesOffsetBefore?: number
 };
 
 const SSwiper = (props: TSwiperProps) => {
@@ -56,7 +58,9 @@ const SSwiper = (props: TSwiperProps) => {
     modules,
     speed,
     coverflowEffect,
-    pagination
+    pagination,
+    slidesOffsetAfter,
+    slidesOffsetBefore
   } = props;
   return (
     <Swiper
@@ -73,6 +77,8 @@ const SSwiper = (props: TSwiperProps) => {
       coverflowEffect={coverflowEffect}
       pagination={pagination}
       className={classname}
+      slidesOffsetAfter={slidesOffsetAfter}
+      slidesOffsetBefore={slidesOffsetBefore}
     >
       {children}
     </Swiper>

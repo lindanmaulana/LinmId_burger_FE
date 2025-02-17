@@ -13,7 +13,7 @@ const HeroBanner = () => {
       className="bg-center bg-cover"
       style={{ backgroundImage: `url(${ImageBurger.heroBg})` }}
     >
-      <LayoutContainer className="h-screen max-w-6xl">
+      <LayoutContainer className="h-[720px] max-w-6xl">
         <SSwiper
           classname="w-full h-full"
           pagination={{ dynamicBullets: true, clickable: true }}
@@ -29,7 +29,7 @@ const HeroBanner = () => {
                   {banner.title}
                 </h2>
                 <p className="text-white max-w-[500px]">{banner.description}</p>
-                <ButtonLink to="" className="py-3 text-center px-9 min-w-40">
+                <ButtonLink to={`/menu`} className="py-3 text-center px-9 min-w-40">
                   Order Now
                 </ButtonLink>
               </div>
