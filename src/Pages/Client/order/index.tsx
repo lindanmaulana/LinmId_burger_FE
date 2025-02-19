@@ -12,10 +12,14 @@ import SSwiper from "../../../components/swiper";
 import useQueryProductDetail from "../../../hooks/query/services/useQueryProductDetail";
 import useQueryProducts from "../../../hooks/query/services/useQueryProducts";
 import useReduxCart from "../../../hooks/redux/client/useReduxCart";
-import { addToCart, removeFromCart } from "../../../redux/slices/client/Cart.features";
 import { AppDispatch } from "../../../redux/store";
-import { detailProduct } from "../../../types/type-product";
 import { baseURLImage } from "../../../utils/axiosInstance";
+import {
+  handleAddCart,
+  handleDecreaseQtyCart,
+  handleIncreaseQtyCart,
+  handleRemoveFromCart,
+} from "../../../utils/cart";
 
 const PageOrder = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,30 +35,8 @@ const PageOrder = () => {
   if (errorProduct || errorDetailProduct)
     return <p>Error loading product...</p>;
 
-  const handleAddCart = (product: detailProduct) => {
-    dispatch(
-      addToCart({
-        id: product._id,
-        name: product.name,
-        price: product.price,
-        qty: 1,
-        stock: product.stock,
-      })
-    );
-  };
+  const handleOrder = () => {};
 
-  const handleRemoveCart = (idProduct: string) => {
-    dispatch(
-      removeFromCart({
-        id: idProduct
-      })
-    )
-  }
-
-  const handleOrder = () => {
-    
-  }
-  
   return (
     <LayoutSection className="">
       <header className="py-10 -mb-20">
@@ -85,7 +67,7 @@ const PageOrder = () => {
                   className="object-cover m-auto w-60"
                 />
                 <ButtonAction
-                  onClick={() => handleAddCart(product)}
+                  onClick={() => handleAddCart({ dispatch, product })}
                   className="absolute top-0 right-0 z-[60] flex items-center gap-px text-devGray"
                 >
                   <BiAddToQueue /> Add
@@ -113,9 +95,39 @@ const PageOrder = () => {
                     <td className="py-2">{cart.qty}</td>
                     <td className="py-2">{cart.price}</td>
                     <td className="flex items-center gap-2 py-2 text-xl">
-                      <button className="px-2 py-px text-white bg-red-500 border rounded"><LuMinus /></button>
-                      <button onClick={() => handleRemoveCart(cart.id)} className="p-px px-2 py-px text-white bg-red-500 border rounded"><IoClose /></button>
-                      <button className="p-px px-2 py-px text-white bg-blue-500 border rounded"><LuPlus /></button>
+                      <button
+                        onClick={() =>
+                          handleDecreaseQtyCart({
+                            dispatch,
+                            product: { id: cart.id, price: cart.price },
+                          })
+                        }
+                        className="px-2 py-px text-white bg-red-500 border rounded"
+                      >
+                        <LuMinus />
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleRemoveFromCart({
+                            dispatch,
+                            product: { id: cart.id },
+                          })
+                        }
+                        className="p-px px-2 py-px text-white bg-red-500 border rounded"
+                      >
+                        <IoClose />
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleIncreaseQtyCart({
+                            dispatch,
+                            product: { id: cart.id, price: cart.price },
+                          })
+                        }
+                        className="p-px px-2 py-px text-white bg-blue-500 border rounded"
+                      >
+                        <LuPlus />
+                      </button>
                     </td>
                   </tr>
                 ))}

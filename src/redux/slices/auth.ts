@@ -15,7 +15,7 @@ const setInitialState = () => {
     if (err instanceof AxiosError && err.response) {
       throw new Error(err.response.data.msg);
     }
-    localStorage.clear();
+    localStorage.removeItem("auth");
     return {
       token: "",
       role: "",
