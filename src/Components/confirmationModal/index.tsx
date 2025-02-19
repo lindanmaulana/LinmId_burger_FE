@@ -8,7 +8,7 @@ import {
 import { AppDispatch, RootState } from "../../redux/store";
 import { TbChecks } from "react-icons/tb";
 import { statusOrder } from "../../types/type-orders";
-import { paymentStatus } from "../../pages/dashboard/views/viewdashboard/payments/payment.type";
+import { paymentStatus } from "../../types/type-payments";
 
 export interface SConfirmationModalProps {
   confirm: (id: string, status: statusOrder | paymentStatus) => void;

@@ -1,20 +1,21 @@
 import { BiAddToQueue } from "react-icons/bi";
+import { IoClose } from "react-icons/io5";
+import { LuMinus, LuPlus } from "react-icons/lu";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Autoplay, Pagination } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
 import ButtonAction from "../../../components/button/ButtonAction";
 import LayoutContainer from "../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../components/layouts/LayoutSection";
 import SSwiper from "../../../components/swiper";
-import useQueryProducts from "../../../hooks/query/services/useQueryProducts";
-import { baseURLImage } from "../../../utils/axiosInstance";
-import { Autoplay, Pagination } from "swiper/modules";
-import { useParams } from "react-router-dom";
 import useQueryProductDetail from "../../../hooks/query/services/useQueryProductDetail";
-import { detailProduct } from "../../../types/type-product";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
-import { addCart } from "../../../redux/slices/client/Cart.features";
+import useQueryProducts from "../../../hooks/query/services/useQueryProducts";
 import useReduxCart from "../../../hooks/redux/client/useReduxCart";
-import { useEffect } from "react";
+import { addToCart, removeFromCart } from "../../../redux/slices/client/Cart.features";
+import { AppDispatch } from "../../../redux/store";
+import { detailProduct } from "../../../types/type-product";
+import { baseURLImage } from "../../../utils/axiosInstance";
 
 const PageOrder = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,22 +23,8 @@ const PageOrder = () => {
   const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
   const { cart, cartProductId } = useReduxCart();
 
-  const { dataDetailProduct, loadingDetailProduct, errorDetailProduct } =
+  const { loadingDetailProduct, errorDetailProduct } =
     useQueryProductDetail(id);
-
-  useEffect(() => {
-    if (dataDetailProduct?.data) {
-      dispatch(
-        addCart({
-          id: dataDetailProduct?.data._id,
-          name: dataDetailProduct?.data.name,
-          price: dataDetailProduct?.data.price,
-          qty: 1,
-          stock: dataDetailProduct?.data.stock,
-        })
-      );
-    }
-  }, [dataDetailProduct, dispatch]);
 
   if (loadingProduct || loadingDetailProduct) return <p>Loading...</p>;
 
@@ -46,7 +33,7 @@ const PageOrder = () => {
 
   const handleAddCart = (product: detailProduct) => {
     dispatch(
-      addCart({
+      addToCart({
         id: product._id,
         name: product.name,
         price: product.price,
@@ -55,6 +42,19 @@ const PageOrder = () => {
       })
     );
   };
+
+  const handleRemoveCart = (idProduct: string) => {
+    dispatch(
+      removeFromCart({
+        id: idProduct
+      })
+    )
+  }
+
+  const handleOrder = () => {
+    
+  }
+  
   return (
     <LayoutSection className="">
       <header className="py-10 -mb-20">
@@ -67,10 +67,10 @@ const PageOrder = () => {
           pagination={{ dynamicBullets: true, clickable: true }}
           modules={[Autoplay, Pagination]}
           autoplay={{
-            delay: 1000,
+            delay: 2000,
             disabledOnInteraction: false,
           }}
-          speed={1000}
+          speed={2000}
           classname="flex gap-10 h-[300px] pointer-events-auto"
         >
           {dataProduct?.data.map((product) => (
@@ -98,41 +98,60 @@ const PageOrder = () => {
       <LayoutContainer className="relative z-10 max-w-6xl pb-5">
         <div className="flex gap-6">
           <div className="w-2/3 p-6 bg-white border rounded-3xl border-devWhitePurple">
-            <h3>Daftar Pesananmu</h3>
-            <div className="flex flex-col gap-2">
-              {cart.map((cart) => (
-                <div key={cart.id} className="grid grid-cols-4">
-                  <p className="col-span-2">{cart.name}</p>
-                  <p>{cart.qty}</p>
-                  <p>{cart.price}</p>
-                </div>
-              ))}
-            </div>
+            <h3 className="mb-3">Daftar Pesananmu</h3>
+            <table className="w-full">
+              <thead className="overflow-hidden text-left">
+                <th className="py-2">Pesanan</th>
+                <th className="py-2">Jumlah</th>
+                <th className="py-2">Total Harga</th>
+                <th className="py-2"></th>
+              </thead>
+              <tbody>
+                {cart.map((cart) => (
+                  <tr key={cart.id} className="">
+                    <td className="py-2">{cart.name}</td>
+                    <td className="py-2">{cart.qty}</td>
+                    <td className="py-2">{cart.price}</td>
+                    <td className="flex items-center gap-2 py-2 text-xl">
+                      <button className="px-2 py-px text-white bg-red-500 border rounded"><LuMinus /></button>
+                      <button onClick={() => handleRemoveCart(cart.id)} className="p-px px-2 py-px text-white bg-red-500 border rounded"><IoClose /></button>
+                      <button className="p-px px-2 py-px text-white bg-blue-500 border rounded"><LuPlus /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className="flex flex-col justify-between w-1/3 gap-5 p-6 h-[300px] bg-white border border-devWhitePurple rounded-3xl">
             <h3 className="font-bold">Your Order Details</h3>
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between text-base">
-                <p className="font-medium ">Sub Total</p>
+                <p className="font-medium ">Sub Total Order</p>
                 <p className="font-extrabold ">
-                  Rp {dataDetailProduct?.data.price}
+                  {cart
+                    .map((product) => product.qty)
+                    .reduce((acc, call) => (acc += call), 0)}
                 </p>
               </div>
               <div className="flex items-center justify-between text-base">
                 <p className="font-medium ">Grand Total</p>
                 <p className="text-lg font-extrabold text-green-600">
-                  Rp {dataDetailProduct?.data.price}
+                  Rp{" "}
+                  {cart
+                    .map((product) => product.price)
+                    .reduce((acc, call) => (acc += call), 0)
+                    .toLocaleString("id")}
                 </p>
               </div>
             </div>
 
             <ButtonAction
-              disabled={cartProductId.length <= 0}
+              disabled={cart.length <= 0}
               className={`${
-                cartProductId.length <= 0 ? "!bg-devGray/40" : "!bg-devGray"
+                cart.length <= 0 ? "!bg-devGray/40" : "!bg-devGray"
               } py-3`}
             >
-              Payment
+              Order
             </ButtonAction>
           </div>
         </div>

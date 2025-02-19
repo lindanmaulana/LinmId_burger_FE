@@ -19,7 +19,6 @@ export default {
         devGray: "#343A40",
         devGreen: "#198754",
         devRed: "#DC3545",
-
       },
       fontFamily: {
         "open-sans-medium": ["open-sans-medium", "serif"],

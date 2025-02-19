@@ -8,9 +8,14 @@ interface cart {
   qty: number;
 }
 
+interface carProduct {
+  id_product: string
+  quantity: number
+}
+
 interface initialStateCart {
   cart: cart[];
-  cartProductId: string[];
+  cartProductId: carProduct[];
 }
 
 const initialState: initialStateCart = {
@@ -22,27 +27,52 @@ const FeaturesCart = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addCart: (state, action: PayloadAction<cart>) => {
-      const updateCart = state.cart.map((cart) => {
-        return cart.id === action.payload.id
-          ? { ...cart, qty: (cart.qty += 1)}
-          : cart;
-      });
-
-      const updatePrice = updateCart.map((cart) => {
-        return cart.id === action.payload.id ? {...cart, price: cart.price *= cart.qty } : cart
-      })
-
-      const cartExist = state.cart.some(
+    addToCart: (state, action: PayloadAction<cart>) => {
+      const cartExist = state.cart.find(
         (cart) => cart.id === action.payload.id
       );
 
-      state.cart = cartExist ? updatePrice : [...state.cart, action.payload];
+      const cartProducExist = state.cartProductId.find(cart => cart.id_product === action.payload.id)
 
-      state.cartProductId = [...state.cartProductId, action.payload.id];
+
+      if(cartExist && cartProducExist) {
+        cartExist.qty += action.payload.qty
+        cartExist.price += action.payload.price
+
+        cartProducExist.quantity++
+      } else {
+        state.cart = [...state.cart, action.payload]
+        state.cartProductId = [...state.cartProductId, {id_product: action.payload.id, quantity: action.payload.qty}]
+      }
+
     },
+
+    removeFromCart: (state, action:PayloadAction<{id: string}>) => {
+      state.cart = state.cart.filter(cart => cart.id !== action.payload.id)
+      state.cartProductId = state.cartProductId.filter(cart => cart !== action.payload.id)
+    },
+
+    increaseQty: (state, action: PayloadAction<{id: string}>) => {
+      const existFromCart = state.cart.find(cart => cart.id === action.payload.id)
+
+      if(existFromCart) {
+        existFromCart.qty++
+      }
+
+      state.cartProductId = [...state.cartProductId, action.payload.id]
+    },
+
+    decreaseQty: (state, action: PayloadAction<{id: string}>) => {
+      const existFromCart = state.cart.find(cart => cart.id === action.payload.id)
+
+      if(existFromCart) {
+        existFromCart.qty--
+      }
+
+
+    }
   },
 });
 
-export const { addCart } = FeaturesCart.actions;
+export const { addToCart, removeFromCart } = FeaturesCart.actions;
 export default FeaturesCart.reducer;

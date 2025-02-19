@@ -1,15 +1,15 @@
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ImageBurger } from "../../../assets/images/burger";
 import ButtonAction from "../../../components/button/ButtonAction";
 import LayoutContainer from "../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../components/layouts/LayoutSection";
 import useQueryProductDetail from "../../../hooks/query/services/useQueryProductDetail";
-import { baseURLImage } from "../../../utils/axiosInstance";
-import { helperFormatCurrency } from "../../../utils/helpers/formatCurrency";
-import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/slices/client/Cart.features";
 import { AppDispatch } from "../../../redux/store";
 import { detailProduct } from "../../../types/type-product";
-import { addCart } from "../../../redux/slices/client/Cart.features";
+import { baseURLImage } from "../../../utils/axiosInstance";
+import { helperFormatCurrency } from "../../../utils/helpers/formatCurrency";
 
 const PageDetailProduct = () => {
   const { id } = useParams();
@@ -29,8 +29,9 @@ const PageDetailProduct = () => {
   const priceProduct = helperFormatCurrency(price);
 
   const handleOrder = (product: detailProduct) => {
-    dispatch(addCart({id: product._id, name: product.name, price: product.price, qty: 1, stock: product.stock}))
-    navigate(`/order/${product._id}`)
+    dispatch(addToCart({id: product._id, name: product.name, price: product.price, qty: 1, stock: product.stock}))
+    
+    navigate(`/order/${product._id}`);
   }
   
   return (
