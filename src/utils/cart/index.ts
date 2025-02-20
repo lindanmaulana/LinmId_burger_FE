@@ -1,11 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { detailProduct } from "../../types/type-product";
 import {
   addToCart,
   decreaseQty,
   increaseQty,
   removeFromCart,
 } from "../../redux/slices/client/Cart.features";
+import { detailProduct } from "../../types/type-product";
 
 interface handleCartProps {
   product: detailProduct;
@@ -20,36 +20,32 @@ export const handleAddCart = (props: handleCartProps) => {
       price: product.price,
       qty: 1,
       stock: product.stock,
+      image: product.id_image.name
     })
   );
 };
 
 interface handleRemoveFromCartProps {
-  product: {
-    id: string;
-  };
+  idProduct: string
   dispatch: Dispatch;
 }
 export const handleRemoveFromCart = (props: handleRemoveFromCartProps) => {
-  const { dispatch, product } = props;
-  dispatch(removeFromCart(product));
+  const { dispatch, idProduct } = props;
+  dispatch(removeFromCart({id: idProduct}));
 };
 
 interface increaseOrDecreaseCartProps {
-  product: {
-    id: string;
-    price: number;
-  };
+  idProduct: string
   dispatch: Dispatch;
 }
 export const handleIncreaseQtyCart = (props: increaseOrDecreaseCartProps) => {
-  const { dispatch, product } = props;
+  const { dispatch, idProduct } = props;
 
-  dispatch(increaseQty(product));
+  dispatch(increaseQty({id: idProduct}));
 };
 
 export const handleDecreaseQtyCart = (props: increaseOrDecreaseCartProps) => {
-  const { dispatch, product } = props;
+  const { dispatch, idProduct } = props;
 
-  dispatch(decreaseQty(product));
+  dispatch(decreaseQty({id: idProduct}));
 };

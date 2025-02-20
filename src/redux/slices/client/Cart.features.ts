@@ -7,6 +7,7 @@ interface cart {
   price: number;
   stock: number;
   qty: number;
+  image: string
 }
 
 interface carProduct {
@@ -95,7 +96,7 @@ const FeaturesCart = createSlice({
       );
     },
 
-    increaseQty: (state, action: PayloadAction<{ id: string, price: number }>) => {
+    increaseQty: (state, action: PayloadAction<{ id: string }>) => {
       const existFromCart = state.cart.find(
         (cart) => cart.id === action.payload.id
       );
@@ -118,7 +119,7 @@ const FeaturesCart = createSlice({
       );
     },
 
-    decreaseQty: (state, action: PayloadAction<{ id: string, price: number }>) => {
+    decreaseQty: (state, action: PayloadAction<{ id: string}>) => {
       const existFromCart = state.cart.find(
         (cart) => cart.id === action.payload.id
       );

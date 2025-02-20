@@ -29,9 +29,9 @@ const PageDetailProduct = () => {
   const priceProduct = helperFormatCurrency(price);
 
   const handleOrder = (product: detailProduct) => {
-    dispatch(addToCart({id: product._id, name: product.name, price: product.price, qty: 1, stock: product.stock}))
+    dispatch(addToCart({id: product._id, name: product.name, price: product.price, qty: 1, stock: product.stock, image: product.id_image.name}))
     
-    navigate(`/order/${product._id}`);
+    navigate(`/order`);
   }
   
   return (
@@ -43,9 +43,9 @@ const PageDetailProduct = () => {
           alt="linmburger"
           className="object-cover w-full h-full"
         />
-        <p className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white">
+        <h2 className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-white">
           Nikmati kelezatan Tiap Gigitannya
-        </p>
+        </h2>
       </div>
       <LayoutContainer className="max-w-6xl">
         <div className="flex items-start w-full h-[520px] gap-6">
