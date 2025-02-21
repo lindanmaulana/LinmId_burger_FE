@@ -5,8 +5,12 @@ import { errorService } from "../errors/errorService";
 import { getDataSignin } from "../helpers";
 
 export interface ServiceOrderCreateData {
-  order_items: string[];
+  order_items: {
+    id_product: string;
+    quantity: number;
+  }[];
 }
+
 export const ServiceOrderCreate = async (data: ServiceOrderCreateData) => {
   const { token } = getDataSignin();
   setToken(token);

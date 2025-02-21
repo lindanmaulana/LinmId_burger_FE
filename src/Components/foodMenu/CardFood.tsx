@@ -1,10 +1,11 @@
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { foodCategorie } from "../../redux/slices/client/HomeFood";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { detailProduct } from "../../types/type-product";
 import { baseURLImage } from "../../utils/axiosInstance";
+import { handleAddCart } from "../../utils/cart";
 import ButtonAction from "../button/ButtonAction";
 
 export interface CardFoodProps {
@@ -35,36 +36,48 @@ const CardFoodMenu = (props: CardFoodProps) => {
   const { categorie, total } = useSelector(
     (state: RootState) => state.client.FeaturesHomeFood
   );
+  const dispatch = useDispatch<AppDispatch>();
 
   const dataFilter = handleFilterData({ categorie, data, total });
+
+  const handleAddToCart = (product: detailProduct) => {
+    handleAddCart({ dispatch, product });
+  };
 
   return (
     <>
       {dataFilter.map((menu) => (
-        <Link
-          to={`/product/detail/${menu._id}`}
+        <div
           key={menu._id}
           className="flex flex-col justify-between text-white bg-primary h-[440px] rounded-2xl overflow-hidden"
         >
-          <figure className="flex relative items-center justify-center group w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey">
-            <span className="absolute px-2 py-1 text-sm rounded-xl top-3 bg-devGray left-3">Best Seller</span>
+          <Link
+            to={`/product/detail/${menu._id}`}
+            className="flex relative items-center justify-center group w-full h-[55%] py-10  rounded-bl-[50px] bg-devWhiteGrey"
+          >
+            <span className="absolute px-2 py-1 text-sm rounded-xl top-3 bg-devGray left-3">
+              Best Seller
+            </span>
             <img
               src={`${baseURLImage}/${menu.id_image.name}`}
               alt="example"
               className="w-[50%] group-hover:scale-125 transition-global"
             />
-          </figure>
+          </Link>
           <div className="p-4 h-[45%] flex flex-col justify-center gap-2">
             <h3 className="text-xl">{menu.name}</h3>
             <p className="mb-3 line-clamp-3">{menu.description}</p>
             <div className="flex items-center justify-between">
               <p>{menu.price}</p>
-              <ButtonAction className="!p-3 rounded-full ">
+              <ButtonAction
+                onClick={() => handleAddToCart(menu)}
+                className="!p-3 rounded-full "
+              >
                 <PiShoppingCartSimpleFill className="text-xl" />
               </ButtonAction>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </>
   );

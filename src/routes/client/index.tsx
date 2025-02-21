@@ -7,6 +7,7 @@ import PageMenu from "../../pages/client/menu";
 import PageOrder from "../../pages/client/order";
 import PageProfile from "../../pages/client/profile";
 import PageCart from "../../pages/client/cart";
+import PageMyOrder from "../../pages/client/myOrder";
 
 const RouterClient = () => {
   const router = useRoutes([
@@ -41,6 +42,10 @@ const RouterClient = () => {
     {
       path: "cart",
       element: <PageCart />
+    },
+    {
+      path: "my-order",
+      element: <PageMyOrder />
     }
   ]);
 

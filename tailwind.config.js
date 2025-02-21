@@ -19,6 +19,10 @@ export default {
         devGray: "#343A40",
         devGreen: "#198754",
         devRed: "#DC3545",
+        statusPending: "#FFC107",
+        statusPaid: "#28A745",
+        statusCanceled: "#DC3545",
+        statusDelivered: "#17A2B8"
       },
       fontFamily: {
         "open-sans-medium": ["open-sans-medium", "serif"],

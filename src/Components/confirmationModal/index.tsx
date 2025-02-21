@@ -11,7 +11,7 @@ import { statusOrder } from "../../types/type-orders";
 import { paymentStatus } from "../../types/type-payments";
 
 export interface SConfirmationModalProps {
-  confirm: (id: string, status: statusOrder | paymentStatus) => void;
+  confirm: () => void;
   cancel: () => void;
 }
 

@@ -1,6 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import {
   addToCart,
+  clearCart,
   decreaseQty,
   increaseQty,
   removeFromCart,
@@ -20,32 +21,36 @@ export const handleAddCart = (props: handleCartProps) => {
       price: product.price,
       qty: 1,
       stock: product.stock,
-      image: product.id_image.name
+      image: product.id_image.name,
     })
   );
 };
 
 interface handleRemoveFromCartProps {
-  idProduct: string
+  idProduct: string;
   dispatch: Dispatch;
 }
 export const handleRemoveFromCart = (props: handleRemoveFromCartProps) => {
   const { dispatch, idProduct } = props;
-  dispatch(removeFromCart({id: idProduct}));
+  dispatch(removeFromCart({ id: idProduct }));
 };
 
 interface increaseOrDecreaseCartProps {
-  idProduct: string
+  idProduct: string;
   dispatch: Dispatch;
 }
 export const handleIncreaseQtyCart = (props: increaseOrDecreaseCartProps) => {
   const { dispatch, idProduct } = props;
 
-  dispatch(increaseQty({id: idProduct}));
+  dispatch(increaseQty({ id: idProduct }));
 };
 
 export const handleDecreaseQtyCart = (props: increaseOrDecreaseCartProps) => {
   const { dispatch, idProduct } = props;
 
-  dispatch(decreaseQty({id: idProduct}));
+  dispatch(decreaseQty({ id: idProduct }));
+};
+
+export const handleClearCart = (props: { dispatch: Dispatch }) => {
+  props.dispatch(clearCart());
 };

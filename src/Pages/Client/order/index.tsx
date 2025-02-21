@@ -1,39 +1,53 @@
+import { useMutation } from "@tanstack/react-query";
 import { BiAddToQueue } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 import { LuMinus, LuPlus } from "react-icons/lu";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
 import ButtonAction from "../../../components/button/ButtonAction";
+import SConfirmationModal from "../../../components/confirmationModal";
 import LayoutContainer from "../../../components/layouts/LayoutContainer";
 import LayoutSection from "../../../components/layouts/LayoutSection";
 import SSwiper from "../../../components/swiper";
 import useQueryProducts from "../../../hooks/query/services/useQueryProducts";
 import useReduxCart from "../../../hooks/redux/client/useReduxCart";
+import { handleSetAlert } from "../../../redux/slices/alertMessage";
+import {
+  handleClearConfirmation,
+  handleSetConfirmationModal,
+} from "../../../redux/slices/confirmationModal";
+import { errorMessage } from "../../../redux/slices/errorMessage";
+import {
+  CLEAR_LOADING,
+  handleIsLoading,
+  SET_LOADING,
+} from "../../../redux/slices/isLoading";
 import { AppDispatch } from "../../../redux/store";
 import { baseURLImage } from "../../../utils/axiosInstance";
 import {
   handleAddCart,
+  handleClearCart,
   handleDecreaseQtyCart,
   handleIncreaseQtyCart,
   handleRemoveFromCart,
 } from "../../../utils/cart";
-import { useMutation } from "@tanstack/react-query";
-import { ServiceOrderCreate } from "../../../utils/services/orders";
-import { handleClearConfirmation, handleSetConfirmationModal } from "../../../redux/slices/confirmationModal";
-import SConfirmationModal from "../../../components/confirmationModal";
+import {
+  ServiceOrderCreate,
+  ServiceOrderCreateData,
+} from "../../../utils/services/orders";
 
 const PageOrder = () => {
-  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { dataProduct, errorProduct, loadingProduct } = useQueryProducts();
-  const { cart, cartProductId } = useReduxCart();
+  const { cart } = useReduxCart();
 
-  // const {} = useMutation({
-  //   mutationKey: ['mutationOrderCreate'],
-  //   mutationFn: () => ServiceOrderCreate()
-  // })
+  const { mutate } = useMutation({
+    mutationKey: ["mutationOrderCreate"],
+    mutationFn: (data: ServiceOrderCreateData) => ServiceOrderCreate(data),
+  });
 
   if (loadingProduct) return <p>Loading...</p>;
 
@@ -47,6 +61,62 @@ const PageOrder = () => {
         transition: true,
       })
     );
+  };
+
+  const handleConfirmationOrder = () => {
+    dispatch(handleClearConfirmation());
+    const dataOrder = () => {
+      const orders = cart.map((cart) => {
+        return {
+          id_product: cart.id,
+          quantity: cart.qty,
+        };
+      });
+
+      return {
+        order_items: orders,
+      };
+    };
+
+    dispatch(handleIsLoading({ type: SET_LOADING }));
+    dispatch(
+      handleSetAlert({
+        active: true,
+        message: "Loading please wait...",
+        transition: true,
+        type: "error",
+      })
+    );
+    mutate(dataOrder(), {
+      onSuccess: (data) => {
+        dispatch(handleClearConfirmation());
+        dispatch(handleIsLoading({ type: CLEAR_LOADING }));
+        dispatch(
+          handleSetAlert({
+            active: true,
+            message: data.message,
+            transition: true,
+            type: "success",
+          })
+        );
+
+        handleClearCart({dispatch})
+
+        navigate("/my-order");
+      },
+      onError: (err) => {
+        dispatch(handleClearConfirmation());
+        dispatch(handleIsLoading({ type: CLEAR_LOADING }));
+        dispatch(
+          handleSetAlert({
+            active: true,
+            message: errorMessage(err),
+            transition: true,
+            type: "error",
+          })
+        );
+      },
+    });
   };
 
   return (
@@ -181,7 +251,10 @@ const PageOrder = () => {
           </div>
         </div>
       </LayoutContainer>
-      <SConfirmationModal cancel={() => dispatch(handleClearConfirmation())} confirm={() => ''}  />
+      <SConfirmationModal
+        cancel={() => dispatch(handleClearConfirmation())}
+        confirm={() => handleConfirmationOrder()}
+      />
     </LayoutSection>
   );
 };

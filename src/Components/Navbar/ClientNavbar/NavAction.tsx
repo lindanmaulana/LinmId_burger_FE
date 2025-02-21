@@ -20,7 +20,7 @@ const NavAction = () => {
       <Link to={""}>
         <IoSearchSharp />
       </Link>
-      <ButtonLink to="" className="">
+      <ButtonLink to="/my-order" className="">
         Order Online
       </ButtonLink>
     </div>
