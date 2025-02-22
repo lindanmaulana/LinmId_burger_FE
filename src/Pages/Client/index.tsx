@@ -15,19 +15,21 @@ const PageClient = (props: pageClientProps) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    document.body.appendChild(snapMidtrans)
+    document.body.appendChild(snapMidtrans);
 
     return () => {
-      document.body.removeChild(snapMidtrans)
-    }
-  }, [])
+      document.body.removeChild(snapMidtrans);
+    };
+  }, []);
 
   return (
     <>
       <ScrollToTop />
-      <header>{!disableNavbar.includes(pathname) ? <Navbar /> : null}</header>
-      <main>{children}</main>
-      {!disableFooter.includes(pathname) ? <Footer /> : null}
+      <div className="flex flex-col min-h-screen">
+        <header>{!disableNavbar.includes(pathname) ? <Navbar /> : null}</header>
+        <main className="flex-grow">{children}</main>
+        {!disableFooter.includes(pathname) ? <Footer /> : null}
+      </div>
     </>
   );
 };

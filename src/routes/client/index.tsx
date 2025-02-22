@@ -8,6 +8,7 @@ import PageOrder from "../../pages/client/order";
 import PageProfile from "../../pages/client/profile";
 import PageCart from "../../pages/client/cart";
 import PageMyOrder from "../../pages/client/myOrder";
+import PagePaymentSuccess from "../../pages/paymentSuccess";
 
 const RouterClient = () => {
   const router = useRoutes([
@@ -46,6 +47,10 @@ const RouterClient = () => {
     {
       path: "my-order",
       element: <PageMyOrder />
+    },
+    {
+      path: "payment-success/*",
+      element: <PagePaymentSuccess />
     }
   ]);
 
