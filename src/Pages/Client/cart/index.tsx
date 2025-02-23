@@ -12,9 +12,8 @@ import {
   handleIncreaseQtyCart,
   handleRemoveFromCart,
 } from "../../../utils/cart";
-import { ca } from "date-fns/locale";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 interface dataCart {
   totalAmount: number;
   totalCart: number;
@@ -23,6 +22,7 @@ interface dataCart {
 const PageCart = () => {
   const { cart } = useReduxCart();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate()
   const [dataCart, setDataCart] = useState<dataCart>({
     totalAmount: 0,
     totalCart: 0,
@@ -45,6 +45,11 @@ const PageCart = () => {
 
     setDataCart({ totalAmount, totalCart, totalOrder });
   }, [cart]);
+
+  const handleGoToOrder = () => {
+    
+    navigate("/order")
+  }
   return (
     <LayoutSection className="">
       <div className="relative -mb-20 h-96 -z-10">
@@ -61,7 +66,7 @@ const PageCart = () => {
       </div>
       <LayoutContainer className="max-w-6xl py-3">
         <div className="flex gap-8">
-          <ul className="flex flex-col w-2/3 h-full gap-3 p-6 bg-white border rounded-3xl border-devWhitePurple">
+          <ul className="flex flex-col w-2/3 gap-3 p-6 overflow-y-auto bg-white border rounded-3xl border-devWhitePurple max-h-96">
             {cart.length > 0 ? (
               cart.map((cart) => (
                 <li
@@ -119,7 +124,7 @@ const PageCart = () => {
               </div>
             )}
           </ul>
-          <div className="flex flex-col justify-between w-1/3 p-6 bg-white border min-h-52 rounded-3xl border-devWhitePurple">
+          <div className="flex flex-col justify-between w-1/3 p-6 bg-white border h-52 rounded-3xl border-devWhitePurple">
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
                 <p>Total Harga: </p>
@@ -136,9 +141,9 @@ const PageCart = () => {
                 <p className="text-green-500">{dataCart.totalOrder}</p>
               </div>
             </div>
-            <Link to={"/order"} className="px-4 py-2 text-center bg-green-500 rounded-2xl">
+            <button onClick={handleGoToOrder} disabled={cart.length <= 0} className="px-4 py-2 text-center text-white bg-green-500 disabled:cursor-not-allowed rounded-2xl">
               Go to Order
-            </Link>
+            </button>
           </div>
         </div>
       </LayoutContainer>

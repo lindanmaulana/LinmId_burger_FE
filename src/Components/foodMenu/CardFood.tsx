@@ -7,6 +7,7 @@ import { detailProduct } from "../../types/type-product";
 import { baseURLImage } from "../../utils/axiosInstance";
 import { handleAddCart } from "../../utils/cart";
 import ButtonAction from "../button/ButtonAction";
+import { handleSetAlert } from "../../redux/slices/alertMessage";
 
 export interface CardFoodProps {
   data: detailProduct[];
@@ -41,6 +42,12 @@ const CardFoodMenu = (props: CardFoodProps) => {
   const dataFilter = handleFilterData({ categorie, data, total });
 
   const handleAddToCart = (product: detailProduct) => {
+    dispatch(handleSetAlert({
+      active: true,
+      message: "Item di tambahkan ke keranjang",
+      transition: true,
+      type: "success"
+    }))
     handleAddCart({ dispatch, product });
   };
 

@@ -41,7 +41,8 @@ const OrderTable = (props: OrderTableProps) => {
                         ? "bg-red-500"
                         : order.status === "pending"
                         ? "bg-yellow-500"
-                        : "bg-blue-500"
+                        : order.status === "paid" ?
+                        "bg-blue-500" : "bg-green-500"
                     } rounded text-white text-xs px-2 py-1`}
                 >
                   {order.status}
@@ -69,7 +70,7 @@ const OrderTable = (props: OrderTableProps) => {
                     handleActionOrder(
                       order._id,
                       `Apakah anda yakin untuk approve order dengan id: ${order._id}`,
-                      "completed"
+                      "delivered"
                     )
                   }
                   className="px-6 py-1 text-xs text-white rounded bg-devBlue"
