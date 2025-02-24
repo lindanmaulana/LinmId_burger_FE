@@ -25,6 +25,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.3",
     "swiper": "^11.2.1",
+    "use-debounce": "^10.0.4",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -32,7 +33,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/swiper": "^5.4.3",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^1.3.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
@@ -42,6 +43,6 @@
     "tailwindcss": "^3.4.17",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "vite": "^6.1.1"
   }
 }

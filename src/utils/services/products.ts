@@ -1,9 +1,20 @@
 import { api, baseURL } from "../axiosInstance";
 import { errorService } from "../errors/errorService";
 
-export const ServiceProductsGetAll = async () => {
+interface ServiceProductGetAllParams {
+  keyword?: string
+}
+export const ServiceProductsGetAll = async (params: ServiceProductGetAllParams) => {
   try {
-    const response = await api.get(`${baseURL}/cms/products`);
+    let apiUrl;
+
+    if(params.keyword) {
+      apiUrl = `${baseURL}/cms/products?keyword=${params.keyword}`
+    } else {
+      apiUrl = `${baseURL}/cms/products`
+    }
+
+    const response = await api.get(apiUrl);
 
     return response.data;
   } catch (err) {
